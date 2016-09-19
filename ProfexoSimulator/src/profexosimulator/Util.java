@@ -1,28 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package profexosimulator;
 
 import java.util.Random;
 
-/**
- *
- * @author marvin
- */
 public class Util {
     
     
     
     static String gerarNomeAleatorio(){
-        String[] listaNomes = new String[]{"André Almeida", "Armando Marques", "Antônio Carlos", "Amaral", "Romário", "Paulo Almeida", 
-            "Junior Baiano", "Odvan", "Nilson", "Clébão", "Douglas Maestro", "Pelé", "Rivaldo", "Pará", "Kléber Pereira", "Fábio Costa"
+        String[] listaNomes = new String[]{"André", "Armando", "Tonhão", "Amaral", "Romário", "Paulo", "Junior Baiano", "Odvan", 
+            "Nilson", "Clébão", "Douglas", "Pelé", "Rivaldo", "Pará", "Kléber", "Fábio", "Marco", "Thiago", "Jumar"
         
         }; 
         
+        String[] listaSobrenomes = new String[]{ "Souza", "Santos", "Silva", "Almeida", "Balada", "Borges", " Baiano",
+            "Camanducaia", "Varzea", "Camargo"
+        
+        };
+        
         Random random = new Random();
-        return listaNomes[random.nextInt(listaNomes.length)];
+        return listaNomes[random.nextInt(listaNomes.length)] + " " + listaSobrenomes[random.nextInt(listaSobrenomes.length)];
         
     }
 
