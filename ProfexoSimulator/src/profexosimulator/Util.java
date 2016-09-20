@@ -4,21 +4,35 @@ import java.util.Random;
 
 public class Util {
     
-    
+    static String gerarTaticaAleatoria(){
+        String[] listaTaticas = new String[] {
+            "334", "343", "352", "361", "424", "433", "442", "451", "532", "541", "631"
+        };
+        
+        return listaTaticas[gerarNumeroAleatorio(0, listaTaticas.length)];
+    }
     
     static String gerarNomeAleatorio(){
-        String[] listaNomes = new String[]{"André", "Armando", "Tonhão", "Amaral", "Romário", "Paulo", "Junior Baiano", "Odvan", 
-            "Nilson", "Clébão", "Douglas", "Pelé", "Rivaldo", "Pará", "Kléber", "Fábio", "Marco", "Thiago", "Jumar"
+        String[] listaNomes = new String[]{
+            "André",    "Armando",          "Tonhão",       "Amaral",       "Romário", 
+            "Paulo",    "Junior Baiano",    "Odvan",        "Nilson",       "Clébão", 
+            "Douglas",  "Pelé",             "Rivaldo",      "Pará",         "Kléber", 
+            "Fábio",    "Marco",            "Thiago",       "Jumar",        "Paulinho",
+            "Tales",    "João",             "Robinho",      "Chicão",       "Bolacha",
+            "Jurandir"
+            
         
         }; 
         
-        String[] listaSobrenomes = new String[]{ "Souza", "Santos", "Silva", "Almeida", "Balada", "Borges", " Baiano",
-            "Camanducaia", "Varzea", "Camargo"
+        String[] listaSobrenomes = new String[]{ 
+            "Souza",    "Santos",       "Silva",        "Almeida",      "Balada", 
+            "Borges",   "Baiano",       "Camanducaia",  "Varzea",       "Camargo",
+            "Batista",  "Henrique",     "Beckham",      "Alonso",       "",
+            "",         "Moraes",       "Cecilio",      "Aguiar",       "Dias"
         
         };
         
-        Random random = new Random();
-        return listaNomes[random.nextInt(listaNomes.length)] + " " + listaSobrenomes[random.nextInt(listaSobrenomes.length)];
+        return listaNomes[gerarNumeroAleatorio(0, listaNomes.length)] + " " + listaSobrenomes[gerarNumeroAleatorio(0, listaSobrenomes.length)];
         
     }
 
@@ -34,8 +48,8 @@ public class Util {
             "Volante", "Armador", "Meia",
             "Ponta", "Atacante", "Centro Avante"
         };
-        Random random = new Random();
-        return listaPosicoes[random.nextInt(listaPosicoes.length)];
+        
+        return listaPosicoes[gerarNumeroAleatorio(0, listaPosicoes.length)];
     }
     
 }

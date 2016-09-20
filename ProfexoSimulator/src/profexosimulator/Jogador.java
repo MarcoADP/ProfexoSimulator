@@ -107,12 +107,12 @@ public class Jogador {
                 maxFisico = ATR_OTIMO; // 60 -> 186
                 break;
                 
-            case "Libero":
+            /*case "Libero":
                 maxDefesa = ATR_OTIMO; // 60
                 maxOfensivo = ATR_RUIM; //30
                 maxPsicologico = ATR_BOM; //48
                 maxFisico = ATR_BOM; //48 186
-                break;
+                break;*/
                 
             case "Lateral":
                 maxDefesa = ATR_BOM;
@@ -191,12 +191,12 @@ public class Jogador {
                 pesoFisico = 3;
                 break;
                 
-            case "Libero":
+            /*case "Libero":
                 pesoDefesa = 3;
                 pesoOfensivo = 1;
                 pesoPsicologico = 3;
                 pesoFisico = 3;
-                break;
+                break;*/
                 
             case "Lateral":
                 pesoDefesa = 3;

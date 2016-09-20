@@ -25,8 +25,8 @@ public class ProfexoSimulator {
         //Jogador jog1 = new Jogador();
         //jog1.mostrarAtributos();
         
-        Equipe equipe = new Equipe("Portuguesa");
-        equipe.mostrarElenco();
+        Equipe equipe = new Equipe("Portuguesa", new Profexo());
+        equipe.mostrarEquipe();
     }
     
 }
