@@ -2,6 +2,7 @@
 Simulador em Técnico de Futebol baseado no Profexô Luxemburgo.
 
 Variáveis do jogo:
+
 Qualidade do Time:
     1:  PÉSSIMO
     2:  RUIM
