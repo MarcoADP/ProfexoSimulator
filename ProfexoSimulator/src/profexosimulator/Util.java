@@ -6,7 +6,7 @@ public class Util {
     
     static String gerarTaticaAleatoria(){
         String[] listaTaticas = new String[] {
-            "334", "343", "352", "361", "424", "433", "442", "451", "532", "541", "631"
+            "343", "352", "433", "442", "451", "541",
         };
         
         return listaTaticas[gerarNumeroAleatorio(0, listaTaticas.length)];
@@ -44,7 +44,7 @@ public class Util {
     }
 
     static String gerarPosicaoAleatoria(){
-        String[] listaPosicoes = new String[]{"Goleiro", "Zagueiro", "Libero", "Lateral", 
+        String[] listaPosicoes = new String[]{"Goleiro", "Zagueiro", "Lateral", 
             "Volante", "Armador", "Meia",
             "Ponta", "Atacante", "Centro Avante"
         };

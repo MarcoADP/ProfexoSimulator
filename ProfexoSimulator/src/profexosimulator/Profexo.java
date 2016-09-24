@@ -18,7 +18,8 @@ public class Profexo {
     public Profexo(){
         this.nome = Util.gerarNomeAleatorio();
         this.mentalide = Util.gerarNumeroAleatorio(0, 6);
-        this.taticaPreferida = "442";
+        this.taticaPreferida = Util.gerarTaticaAleatoria();
+        //this.taticaPreferida = "442";
         
     }
     

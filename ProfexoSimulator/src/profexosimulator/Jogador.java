@@ -7,7 +7,7 @@ public class Jogador {
     private int idade;
     private int altura;
     private String posicao_primaria;
-    private String posicao_secundaria;
+    //private String posicao_secundaria;
     
     public final static int NUMERO_ATRIBUTOS = 12;
     public final static int TIPO_ATRIBUTOS = 4;
@@ -40,9 +40,9 @@ public class Jogador {
     public Jogador(String posicao) {
         this.nome = Util.gerarNomeAleatorio();
         this.posicao_primaria = posicao;
-        do{
+        /*do{
             this.posicao_secundaria = Util.gerarPosicaoAleatoria();
-        } while(posicao_secundaria.equals(posicao_primaria));
+        } while(posicao_secundaria.equals(posicao_primaria));*/
         
         this.idade = Util.gerarNumeroAleatorio(17, 40);
         this.altura = Util.gerarNumeroAleatorio(167, 200);
@@ -52,9 +52,9 @@ public class Jogador {
     public Jogador(){
         this.nome = Util.gerarNomeAleatorio();
         this.posicao_primaria = Util.gerarPosicaoAleatoria();
-        do{
+        /*do{
             this.posicao_secundaria = Util.gerarPosicaoAleatoria();
-        } while(posicao_secundaria.equals(posicao_primaria));
+        } while(posicao_secundaria.equals(posicao_primaria));*/
         
         this.idade = Util.gerarNumeroAleatorio(17, 40);
         this.altura = Util.gerarNumeroAleatorio(167, 200);
@@ -263,7 +263,7 @@ public class Jogador {
     public void mostrarAtributos(){
         System.out.println("Nome: " + this.nome + "\tOverall: " + this.overall);
         System.out.println("Idade: " + this.idade + "\t\tAltura: " + this.altura);
-        System.out.println("Posicao: " + this.posicao_primaria + " / " + this.posicao_secundaria);
+        System.out.println("Posicao: " + this.posicao_primaria/* + " / " + this.posicao_secundaria*/);
         System.out.println("");
         
         //this.mostrarAtributosDetalhados();
@@ -380,13 +380,13 @@ public class Jogador {
         this.posicao_primaria = posicao_primaria;
     }
 
-    public String getPosicao_secundaria() {
+    /*public String getPosicao_secundaria() {
         return posicao_secundaria;
     }
 
     public void setPosicao_secundaria(String posicao_secundaria) {
         this.posicao_secundaria = posicao_secundaria;
-    }
+    }*/
     
     
     

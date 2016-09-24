@@ -24,12 +24,17 @@ public class Equipe {
     int numPonta = 3;
     int numAtacante = 2;
     int numCentroAvante = 2; //7
+    
+    String taticaAtual;
+    int mentalidadeAtual;
+    ArrayList<Jogador> escalacao;
             
     public Equipe(String nome, Profexo profexo){
         this.nome = nome;
         this.profexo = profexo;
         this.formarElenco();
         this.overallEquipe = this.calcularOverallEquipe();
+        this.escalacao = new ArrayList(11);
     }
     
     public Equipe(String nome, Profexo profexo, int goleiro, int zagueiro, int lateral, int volante, int meia, int armador, int ponta, int atacante, int centroavante){
@@ -49,6 +54,103 @@ public class Equipe {
         
     }
 
+    public void escalarTime(){
+        this.taticaAtual = this.profexo.taticaPreferida;
+        this.mentalidadeAtual = this.profexo.mentalide;
+        //System.out.println("Tatica: " + this.taticaAtual);
+        this.escalarJogador("Goleiro");
+        switch(this.taticaAtual.charAt(0)){
+            case '3':
+                this.escalarJogador("Zagueiro");
+                this.escalarJogador("Zagueiro");
+                this.escalarJogador("Zagueiro");
+                break;
+            case '4':
+                this.escalarJogador("Lateral");
+                this.escalarJogador("Lateral");
+                this.escalarJogador("Zagueiro");
+                this.escalarJogador("Zagueiro");
+                break;
+            case '5':
+                this.escalarJogador("Lateral");
+                this.escalarJogador("Lateral");
+                this.escalarJogador("Zagueiro");
+                this.escalarJogador("Zagueiro");
+                this.escalarJogador("Zagueiro");
+                
+        }
+        switch(this.taticaAtual.charAt(1)){
+            case '3':
+                if(this.mentalidadeAtual > 2){
+                    this.escalarJogador("Armador");
+                } else {
+                    this.escalarJogador("Volante");
+                }
+                this.escalarJogador("Meia");
+                this.escalarJogador("Meia");
+                break;
+            case '4':
+                this.escalarJogador("Volante");
+                this.escalarJogador("Meia");
+                this.escalarJogador("Meia");
+                this.escalarJogador("Armador");
+                break;
+            case '5':
+                this.escalarJogador("Volante");
+                this.escalarJogador("Volante");
+                this.escalarJogador("Meia");
+                this.escalarJogador("Meia");
+                this.escalarJogador("Armador");
+                break;          
+        }
+        switch(this.taticaAtual.charAt(2)){
+            case '1':
+                this.escalarJogador("Centro Avante");
+                break;
+            case '2':
+                this.escalarJogador("Atacante");
+                this.escalarJogador("Centro Avante");
+                break;
+            case '3':
+                this.escalarJogador("Ponta");
+                this.escalarJogador("Ponta");
+                if(this.mentalidadeAtual > 2){
+                    this.escalarJogador("Centro Avante");
+                } else {
+                    this.escalarJogador("Atacante");
+                }
+                break;
+        }
+    }
+   
+    private void escalarJogador(String posicao){
+        Jogador escolhido = null;
+        for(Jogador jogador : this.plantel){
+            if(jogador.getPosicao_primaria().equals(posicao)){
+                if(escolhido == null || jogador.getOverall() > escolhido.getOverall()){
+                    if(!isEscalado(jogador)){
+                        escolhido = jogador;
+                    }
+                }
+                
+            }    
+        }
+        //System.out.println(escolhido.getNome());
+        this.escalacao.add(escolhido);
+    }
+    
+    private boolean isEscalado(Jogador jogador){
+        if(this.escalacao.isEmpty()){
+            return false;
+        }
+        for(Jogador jog1 : this.escalacao){
+            if(jog1.equals(jogador)){
+                return true;
+            }
+        }
+        return false;
+    }
+    
     private int calcularOverallEquipe(){
         int soma = 0;
         for(Jogador jogador : this.plantel){
@@ -92,12 +194,29 @@ public class Equipe {
         System.out.println("Equipe: " + this.nome);
         System.out.println("Capacidade: " + this.overallEquipe);
         this.profexo.mostrarProfexo();
-        this.mostrarElenco();
+        this.mostrarEscalacao();
+        //this.mostrarElenco();
+    }
+    
+    public void mostrarEscalacao(){
+        System.out.println("Tatica:" + this.taticaAtual);
+        System.out.println("Mentalidade: " + this.mentalidadeAtual);
+        System.out.println("");
+        //String posAnterior = "Goleiro";
+        if(!this.escalacao.isEmpty()){
+            for(Jogador jogador : this.escalacao){
+                /*if(!posAnterior.equals(jogador.getPosicao_primaria())){
+                    System.out.println("");
+                }*/
+                //posAnterior = jogador.getPosicao_primaria();
+                System.out.println(jogador.getPosicao_primaria() + ": " + jogador.getNome() + " " + jogador.getOverall());
+            }
+        }
     }
     
     public void mostrarElenco(){
         int i;
-        
+       
         for(Jogador jogador : plantel){
            // System.out.println("Nome: " + jogador.getNome() + "\tPosicao: " + jogador.getPosicao_primaria() + 
            //         "\tOverall: "+ jogador.getOverall());
