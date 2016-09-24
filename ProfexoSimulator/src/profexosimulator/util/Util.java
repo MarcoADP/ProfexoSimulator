@@ -1,10 +1,10 @@
-package profexosimulator;
+package profexosimulator.util;
 
 import java.util.Random;
 
 public class Util {
     
-    static String gerarTaticaAleatoria(){
+    public static String gerarTaticaAleatoria(){
         String[] listaTaticas = new String[] {
             "343", "352", "433", "442", "451", "541",
         };
@@ -12,7 +12,7 @@ public class Util {
         return listaTaticas[gerarNumeroAleatorio(0, listaTaticas.length)];
     }
     
-    static String gerarNomeAleatorio(){
+    public static String gerarNomeAleatorio(){
         String[] listaNomes = new String[]{
             "André",    "Armando",          "Tonhão",       "Amaral",       "Romário", 
             "Paulo",    "Junior Baiano",    "Odvan",        "Nilson",       "Clébão", 
@@ -32,24 +32,28 @@ public class Util {
         
         };
         
-        return listaNomes[gerarNumeroAleatorio(0, listaNomes.length)] + " " + listaSobrenomes[gerarNumeroAleatorio(0, listaSobrenomes.length)];
+        return listaNomes[gerarNumeroAleatorio(listaNomes.length)] + " " + listaSobrenomes[gerarNumeroAleatorio(listaSobrenomes.length)];
         
     }
 
-    static int gerarNumeroAleatorio(int min, int max){
-        Random random = new Random();
-        int retorno = random.nextInt(max-min) + min;
-        
-        return retorno;
-    }
-
-    static String gerarPosicaoAleatoria(){
-        String[] listaPosicoes = new String[]{"Goleiro", "Zagueiro", "Lateral", 
+    public static String gerarPosicaoAleatoria(){
+        String[] listaPosicoes = new String[]{"Goleiro", "Zagueiro", "Lateral",
             "Volante", "Armador", "Meia",
             "Ponta", "Atacante", "Centro Avante"
         };
-        
+
         return listaPosicoes[gerarNumeroAleatorio(0, listaPosicoes.length)];
     }
-    
+
+    public static int gerarNumeroAleatorio(int min, int max){
+        Random random = new Random();
+        int retorno = random.nextInt(max-min) + min;
+
+        return retorno;
+    }
+
+    public static int gerarNumeroAleatorio(int max) {
+        return gerarNumeroAleatorio(0, max);
+    }
+
 }
