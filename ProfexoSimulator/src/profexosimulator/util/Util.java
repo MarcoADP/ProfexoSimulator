@@ -3,13 +3,13 @@ package profexosimulator.util;
 import java.util.Random;
 
 public class Util {
+
+    public static final String[] TATICAS = new String[] {
+            "3-4-3", "3-5-2", "4-3-3", "4-4-2", "4-5-1", "5-4-1",
+    };
     
     public static String gerarTaticaAleatoria(){
-        String[] listaTaticas = new String[] {
-            "343", "352", "433", "442", "451", "541",
-        };
-        
-        return listaTaticas[gerarNumeroAleatorio(0, listaTaticas.length)];
+        return TATICAS[gerarNumeroAleatorio(0, TATICAS.length)];
     }
     
     public static String gerarNomeAleatorio(){

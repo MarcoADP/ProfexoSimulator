@@ -2,55 +2,67 @@ package profexosimulator.model;
 
 import profexosimulator.util.Util;
 
+import static profexosimulator.util.Util.gerarNumeroAleatorio;
+
 public class Profexo {
 
-    public final static int MENTALIDADE_CELSOROTH = 0;   //Retranca
-    public final static int MENTALIDADE_DEFENSIVA = 1;   //defensivo
-    public final static int MENTALIDADE_NORMAL = 2;       //normal
-    public final static int MENTALIDADE_CONTROLE = 3;    //controle de bola
-    public final static int MENTALIDADE_OFENSIVO = 4;    //ofensivo
-    public final static int MENTALIDADE_SUICIDA = 5;     //super ofensivo
+    public enum Mentalidade {
+        CELSO_ROTH("Celso Roth - Retranca", 0),  //Retranca
+        DEFENSIVA("Defensiva", 1),               //defensivo
+        NORMAL("Normal", 2),                     //normal
+        CONTROLE("Controle de Bola", 3),         //controle de bola
+        OFENSIVO("Ofensivo", 4),                 //ofensivo
+        SUICIDA("Suicida", 5);                   //super ofensivo
+
+        private String nome;
+        private int num;
+
+        Mentalidade(String nome, int num) {
+            this.nome = nome;
+            this.num = num;
+        }
+
+        public String getNome() {
+            return nome;
+        }
+
+        public int getNum() {
+            return num;
+        }
+
+        @Override
+        public String toString() {
+            return nome;
+        }
+    }
 
     private String nome;
-    private int mentalide;
+    private Mentalidade mentalide;
     private String taticaPreferida;
 
     public Profexo() {
         this.nome = Util.gerarNomeAleatorio();
-        this.mentalide = Util.gerarNumeroAleatorio(0, 6);
+        this.mentalide = gerarMentalidadeAleatorio();
         this.taticaPreferida = Util.gerarTaticaAleatoria();
         //this.taticaPreferida = "442";
-
     }
 
     public void mostrarProfexo() {
         System.out.println("Profexo: " + this.nome);
-        System.out.println("Tatica: " + this.taticaPreferida + "\tMentalidade: " + this.converteMentalidade(this.mentalide));
+        System.out.println("Tatica: " + this.taticaPreferida + "\tMentalidade: " + this.mentalide);
         System.out.println("");
     }
 
-    public String converteMentalidade(int num) {
-        switch (num) {
-            case 0:
-                return "Celso Roth";
-            case 1:
-                return "Defensivo";
-            case 2:
-                return "Normal";
-            case 3:
-                return "Controle";
-            case 4:
-                return "Ofensivo";
-            default:
-                return "Suicida";
-        }
+    private Mentalidade gerarMentalidadeAleatorio() {
+        Mentalidade[] mentalidades = Mentalidade.values();
+        return mentalidades[gerarNumeroAleatorio(mentalidades.length)];
     }
 
     public String getNome() {
         return nome;
     }
 
-    public int getMentalide() {
+    public Mentalidade getMentalide() {
         return mentalide;
     }
 

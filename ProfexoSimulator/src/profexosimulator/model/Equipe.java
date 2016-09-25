@@ -1,13 +1,15 @@
 package profexosimulator.model;
 
 import java.util.ArrayList;
+import java.util.List;
+import profexosimulator.model.Profexo.Mentalidade;
 
 public class Equipe {
 
     public final static int NUMERO_JOGADORES = 25;
 
     private String nome;
-    private ArrayList<Jogador> plantel;
+    private List<Jogador> plantel;
     private Profexo profexo;
     private int overallEquipe;
 
@@ -26,15 +28,15 @@ public class Equipe {
     private int numCentroAvante = 2; //7
 
     private String taticaAtual;
-    private int mentalidadeAtual;
-    private ArrayList<Jogador> escalacao;
+    private Mentalidade mentalidadeAtual;
+    private List<Jogador> escalacao;
 
     public Equipe(String nome, Profexo profexo) {
         this.nome = nome;
         this.profexo = profexo;
         this.formarElenco();
         this.overallEquipe = this.calcularOverallEquipe();
-        this.escalacao = new ArrayList(11);
+        this.escalacao = new ArrayList<>(11);
     }
 
     public Equipe(String nome, Profexo profexo, int goleiro, int zagueiro, int lateral, int volante, int meia, int armador, int ponta, int atacante, int centroavante) {
@@ -79,9 +81,9 @@ public class Equipe {
                 this.escalarJogador("Zagueiro");
 
         }
-        switch (this.taticaAtual.charAt(1)) {
+        switch (this.taticaAtual.charAt(2)) {
             case '3':
-                if (this.mentalidadeAtual > 2) {
+                if (this.mentalidadeAtual.getNum() > 2) {
                     this.escalarJogador("Armador");
                 } else {
                     this.escalarJogador("Volante");
@@ -103,7 +105,7 @@ public class Equipe {
                 this.escalarJogador("Armador");
                 break;
         }
-        switch (this.taticaAtual.charAt(2)) {
+        switch (this.taticaAtual.charAt(4)) {
             case '1':
                 this.escalarJogador("Centro Avante");
                 break;
@@ -114,7 +116,7 @@ public class Equipe {
             case '3':
                 this.escalarJogador("Ponta");
                 this.escalarJogador("Ponta");
-                if (this.mentalidadeAtual > 2) {
+                if (this.mentalidadeAtual.getNum() > 2) {
                     this.escalarJogador("Centro Avante");
                 } else {
                     this.escalarJogador("Atacante");

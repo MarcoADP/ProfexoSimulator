@@ -3,6 +3,7 @@ package profexosimulator.model;
 import profexosimulator.util.Util;
 
 public class Jogador {
+
     private String nome;
     private int idade;
     private int altura;
