@@ -1,40 +1,36 @@
 package profexosimulator.controller;
 
 
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
+import javafx.util.Duration;
 import profexosimulator.ProfexoSimulator;
-import profexosimulator.model.Profexo;
-import profexosimulator.util.Util;
 
-import java.util.Arrays;
+import java.io.IOException;
 
 public class MainController {
 
     @FXML
-    private TextField fieldNomeProfexo;
+    private BorderPane borderPane;
+
     @FXML
-    private ChoiceBox choiceMentalidade;
-    @FXML
-    private ChoiceBox choiceTatica;
-    @FXML
-    private TextField fieldNomeTime;
-    @FXML
-    private Button btnProximo;
+    private ParametrosController parametrosController;
+    private ElencoController elencoController;
+
+    public static MainController INSTANCE;
 
     @FXML
     private void initialize() {
-        choiceMentalidade.setItems(FXCollections.observableList(Arrays.asList(Profexo.Mentalidade.values())));
-        choiceMentalidade.getSelectionModel().select(0);
-
-        choiceTatica.setItems(FXCollections.observableList(Arrays.asList(Util.TATICAS)));
-        choiceTatica.getSelectionModel().select(0);
-
+        INSTANCE = this;
+        inicializarControllerJogadores();
     }
 
     @FXML
@@ -52,8 +48,49 @@ public class MainController {
         ProfexoSimulator.novoJogo();
     }
 
-    @FXML
-    public void handleBtnProximo(ActionEvent actionEvent) {
+    public void proximaTela(Pane novo) {
+        mostrarTela(novo, 1);
+    }
 
+    public void voltarTela(Pane novo) {
+        mostrarTela(novo, -1);
+    }
+
+    private void mostrarTela(Pane novo, int fator) {
+        Node antigo = borderPane.getCenter();
+
+        borderPane.setCenter(novo);
+        ProfexoSimulator.INSTANCE.getStage().sizeToScene();
+
+        double width = borderPane.getWidth();
+
+        KeyFrame start = new KeyFrame(Duration.ZERO,
+                new KeyValue(novo.translateXProperty(), width*fator),
+                new KeyValue(antigo.translateXProperty(), 0));
+
+        KeyFrame end = new KeyFrame(Duration.seconds(0.2),
+                new KeyValue(novo.translateXProperty(), 0),
+                new KeyValue(antigo.translateXProperty(), -width*fator));
+
+        Timeline slide = new Timeline(start, end);
+        slide.play();
+    }
+
+    private void inicializarControllerJogadores() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/elenco.fxml"));
+        try {
+            Pane pane = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        elencoController = loader.getController();
+    }
+
+    public ParametrosController getParametrosController() {
+        return parametrosController;
+    }
+
+    public ElencoController getElencoController() {
+        return elencoController;
     }
 }

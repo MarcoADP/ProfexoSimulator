@@ -128,7 +128,7 @@ public class Equipe {
     private void escalarJogador(String posicao) {
         Jogador escolhido = null;
         for (Jogador jogador : this.plantel) {
-            if (jogador.getPosicao_primaria().equals(posicao)) {
+            if (jogador.getPosicao().equals(posicao)) {
                 if (escolhido == null || jogador.getOverall() > escolhido.getOverall()) {
                     if (!isEscalado(jogador)) {
                         escolhido = jogador;
@@ -207,11 +207,11 @@ public class Equipe {
         //String posAnterior = "Goleiro";
         if (!this.escalacao.isEmpty()) {
             for (Jogador jogador : this.escalacao) {
-                /*if(!posAnterior.equals(jogador.getPosicao_primaria())){
+                /*if(!posAnterior.equals(jogador.getPosicao())){
                     System.out.println("");
                 }*/
-                //posAnterior = jogador.getPosicao_primaria();
-                System.out.println(jogador.getPosicao_primaria() + ": " + jogador.getNome() + " " + jogador.getOverall());
+                //posAnterior = jogador.getPosicao();
+                System.out.println(jogador.getPosicao() + ": " + jogador.getNome() + " " + jogador.getOverall());
             }
         }
     }
@@ -220,11 +220,17 @@ public class Equipe {
         int i;
 
         for (Jogador jogador : plantel) {
-            // System.out.println("Nome: " + jogador.getNome() + "\tPosicao: " + jogador.getPosicao_primaria() +
+            // System.out.println("Nome: " + jogador.getNome() + "\tPosicao: " + jogador.getPosicao() +
             //         "\tOverall: "+ jogador.getOverall());
             jogador.mostrarAtributos();
         }
     }
 
+    public List<Jogador> getPlantel() {
+        return plantel;
+    }
 
+    public String getNome() {
+        return nome;
+    }
 }

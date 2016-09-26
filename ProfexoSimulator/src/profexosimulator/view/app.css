@@ -1,9 +1,14 @@
+
 .border-pane {
     -fx-background-color: derive(lightgray, 20%);
 }
 
-.grid-pane {
+.painel {
     -fx-border-color: #a8a8a8;
     -fx-border-width: 1;
     -fx-background-color: #F2F2F2;
+}
+
+.h1 {
+    -fx-font-size: 28;
 }

@@ -6,8 +6,8 @@ public class Jogador {
 
     private String nome;
     private int idade;
-    private int altura;
-    private String posicao_primaria;
+    private double altura;
+    private String posicao;
     //private String posicao_secundaria;
 
     public final static int NUMERO_ATRIBUTOS = 12;
@@ -40,22 +40,22 @@ public class Jogador {
 
     public Jogador(String posicao) {
         this.nome = Util.gerarNomeAleatorio();
-        this.posicao_primaria = posicao;
+        this.posicao = posicao;
         /*do{
             this.posicao_secundaria = Util.gerarPosicaoAleatoria();
-        } while(posicao_secundaria.equals(posicao_primaria));*/
+        } while(posicao_secundaria.equals(posicao));*/
 
         this.idade = Util.gerarNumeroAleatorio(17, 40);
-        this.altura = Util.gerarNumeroAleatorio(167, 200);
+        this.altura = Util.gerarDoubleAleatorio(1.67, 2.00);
         this.overall = this.calcularOverall();
     }
 
     public Jogador() {
         this.nome = Util.gerarNomeAleatorio();
-        this.posicao_primaria = Util.gerarPosicaoAleatoria();
+        this.posicao = Util.gerarPosicaoAleatoria();
         /*do{
             this.posicao_secundaria = Util.gerarPosicaoAleatoria();
-        } while(posicao_secundaria.equals(posicao_primaria));*/
+        } while(posicao_secundaria.equals(posicao));*/
 
         this.idade = Util.gerarNumeroAleatorio(17, 40);
         this.altura = Util.gerarNumeroAleatorio(167, 200);
@@ -93,7 +93,7 @@ public class Jogador {
         int maxPsicologico = 0;
         int maxFisico = 0;
 
-        switch (this.posicao_primaria) {
+        switch (this.posicao) {
             case "Goleiro":
                 maxDefesa = ATR_OTIMO;  //20*3 = 60
                 maxOfensivo = ATR_RUIM; //10*3 = 30
@@ -177,7 +177,7 @@ public class Jogador {
         int pesoOfensivo = 0;
         int pesoPsicologico = 0;
         int pesoFisico = 0;
-        switch (this.posicao_primaria) {
+        switch (this.posicao) {
             case "Goleiro":
                 pesoDefesa = 4;
                 pesoOfensivo = 1;
@@ -264,7 +264,7 @@ public class Jogador {
     public void mostrarAtributos() {
         System.out.println("Nome: " + this.nome + "\tOverall: " + this.overall);
         System.out.println("Idade: " + this.idade + "\t\tAltura: " + this.altura);
-        System.out.println("Posicao: " + this.posicao_primaria/* + " / " + this.posicao_secundaria*/);
+        System.out.println("Posicao: " + this.posicao/* + " / " + this.posicao_secundaria*/);
         System.out.println("");
 
         //this.mostrarAtributosDetalhados();
@@ -374,12 +374,16 @@ public class Jogador {
         this.idade = idade;
     }
 
-    public String getPosicao_primaria() {
-        return posicao_primaria;
+    public double getAltura() {
+        return altura;
     }
 
-    public void setPosicao_primaria(String posicao_primaria) {
-        this.posicao_primaria = posicao_primaria;
+    public String getPosicao() {
+        return posicao;
+    }
+
+    public void setPosicao(String posicao) {
+        this.posicao = posicao;
     }
 
     /*public String getPosicao_secundaria() {

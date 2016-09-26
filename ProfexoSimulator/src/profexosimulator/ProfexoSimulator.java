@@ -6,10 +6,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.net.URL;
+
 public class ProfexoSimulator extends Application {
 
     public static final String TITULO = "Profexô Simulator";
-    public static final int LARGURA = 400;
+    public static final int LARGURA = 420;
     public static final int ALTURA = 280;
 
     public static ProfexoSimulator INSTANCE;

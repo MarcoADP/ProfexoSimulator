@@ -56,4 +56,11 @@ public class Util {
         return gerarNumeroAleatorio(0, max);
     }
 
+    public static double gerarDoubleAleatorio(double min, double max) {
+        Random random = new Random();
+        double retorno = random.nextDouble()*(max - min) + min;
+
+        return retorno;
+    }
+
 }
