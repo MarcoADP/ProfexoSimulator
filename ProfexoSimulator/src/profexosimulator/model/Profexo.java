@@ -11,8 +11,8 @@ public class Profexo {
         DEFENSIVA("Defensiva", 1),               //defensivo
         NORMAL("Normal", 2),                     //normal
         CONTROLE("Controle de Bola", 3),         //controle de bola
-        OFENSIVO("Ofensivo", 4),                 //ofensivo
-        SUICIDA("Suicida", 5);                   //super ofensivo
+        OFENSIVO("Ofensivo", 4);                 //ofensivo
+        //SUICIDA("Suicida", 5);                   //super ofensivo
 
         private String nome;
         private int num;
