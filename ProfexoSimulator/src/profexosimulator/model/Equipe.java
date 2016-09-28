@@ -35,7 +35,6 @@ public class Equipe {
         this.nome = nome;
         this.profexo = profexo;
         this.formarElenco();
-        this.overallEquipe = this.calcularOverallEquipe();
         this.escalacao = new ArrayList<>(11);
     }
 
@@ -57,7 +56,7 @@ public class Equipe {
     }
 
     public void escalarTime() {
-        this.taticaAtual = this.profexo.getTaticaPreferida();
+        this.taticaAtual = this.profexo.getTaticaPreferida().getTatica();
         this.mentalidadeAtual = this.profexo.getMentalide();
         //System.out.println("Tatica: " + this.taticaAtual);
         this.escalarJogador("Goleiro");
@@ -163,7 +162,7 @@ public class Equipe {
         return soma;
     }
 
-    private void formarElenco() {
+    public void formarElenco() {
 
         this.numElenco = this.numGoleiro + this.numZagueiro + this.numLateral + this.numVolante + this.numMeia + this.numArmador + this.numPonta + this.numAtacante + this.numCentroAvante;
         this.plantel = new ArrayList<>();
@@ -182,6 +181,7 @@ public class Equipe {
         this.adicionarJogador("Atacante", numAtacante);
         this.adicionarJogador("Centro Avante", numCentroAvante); //7 //25
 
+        this.overallEquipe = this.calcularOverallEquipe();
     }
 
     public void adicionarJogador(String posicao, int quantidade) {
@@ -232,5 +232,9 @@ public class Equipe {
 
     public String getNome() {
         return nome;
+    }
+
+    public Profexo getProfexo() {
+        return profexo;
     }
 }

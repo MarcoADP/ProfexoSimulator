@@ -17,7 +17,7 @@
             <children>
                 <VBox spacing="10.0" styleClass="painel" HBox.hgrow="SOMETIMES">
                     <children>
-                        <Label styleClass="h1" text="Elenco"/>
+                        <Label fx:id="labelElencoJogador" styleClass="h1" text="Elenco"/>
                         <TableView VBox.vgrow="SOMETIMES" fx:id="tabelaElenco">
                             <columns>
                                 <TableColumn minWidth="150.0" prefWidth="150.0" text="Nome">
@@ -44,7 +44,7 @@
                 </VBox>
                 <VBox layoutX="10.0" layoutY="10.0" spacing="10.0" styleClass="painel" HBox.hgrow="SOMETIMES">
                     <children>
-                        <Label styleClass="h1" text="Elenco Adversário"/>
+                        <Label fx:id="labelElencoAdversario" styleClass="h1" text="Elenco Adversário"/>
                         <TableView VBox.vgrow="SOMETIMES" fx:id="tabelaAdversario">
                             <columns>
                                 <TableColumn minWidth="150.0" prefWidth="150.0" text="Nome">
@@ -76,7 +76,7 @@
                 <Button mnemonicParsing="false" text="Gerar Elenco" onAction="#handleBtnGerarElenco"/>
                 <Region HBox.hgrow="ALWAYS"/>
                 <Button mnemonicParsing="false" onAction="#handleBtnVoltar" text="Voltar"/>
-                <Button defaultButton="true" mnemonicParsing="false" text="Próximo" onAction="#handleBtnProximo"/>
+                <Button mnemonicParsing="false" text="Próximo" styleClass="btn-primary" onAction="#handleBtnProximo"/>
             </children>
             <VBox.margin>
                 <Insets top="10.0"/>

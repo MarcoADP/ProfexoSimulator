@@ -13,6 +13,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 import profexosimulator.ProfexoSimulator;
+import profexosimulator.fuzzy.Simulador;
 
 import java.io.IOException;
 
@@ -27,9 +28,12 @@ public class MainController {
 
     public static MainController INSTANCE;
 
+    private Simulador simulador;
+
     @FXML
     private void initialize() {
         INSTANCE = this;
+        simulador = new Simulador();
         inicializarControllerJogadores();
     }
 
@@ -92,5 +96,9 @@ public class MainController {
 
     public ElencoController getElencoController() {
         return elencoController;
+    }
+
+    public Simulador getSimulador() {
+        return simulador;
     }
 }

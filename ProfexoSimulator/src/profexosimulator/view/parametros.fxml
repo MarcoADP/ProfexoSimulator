@@ -12,13 +12,14 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="200.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.76-ea"
-      xmlns:fx="http://javafx.com/fxml/1" fx:controller="profexosimulator.controller.ParametrosController" fx:id="root">
+<VBox fx:id="root" prefHeight="200.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.76-ea"
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="profexosimulator.controller.ParametrosController">
     <children>
         <GridPane hgap="5.0" styleClass="painel" vgap="5.0">
             <columnConstraints>
                 <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="100.0"/>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="195.0"/>
+                <ColumnConstraints hgrow="NEVER"/>
             </columnConstraints>
             <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
@@ -32,6 +33,7 @@
                 <ChoiceBox fx:id="choiceMentalidade" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
                 <Label text="Tática Preferida:" GridPane.rowIndex="2"/>
                 <ChoiceBox fx:id="choiceTatica" prefWidth="80.0" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                <Button mnemonicParsing="false" text="Aleatório" GridPane.columnIndex="2" onAction="#handleBtnNomeProfexoAleatorio"/>
             </children>
             <VBox.margin>
                 <Insets/>
@@ -43,14 +45,16 @@
         <GridPane hgap="5.0" styleClass="painel" vgap="5.0">
             <columnConstraints>
                 <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="100.0"/>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="195.0"/>
+                <ColumnConstraints hgrow="NEVER"/>
             </columnConstraints>
             <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
             </rowConstraints>
             <children>
                 <Label text="Nome do Time:"/>
-                <TextField fx:id="fieldNomeTime" GridPane.columnIndex="1"/>
+                <TextField fx:id="fieldNomeTime" prefWidth="161.0" GridPane.columnIndex="1"/>
+                <Button mnemonicParsing="false" text="Aleatório" GridPane.columnIndex="2" onAction="#handleBtnNomeTimeAleatorio"/>
             </children>
             <padding>
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
@@ -61,13 +65,12 @@
         </GridPane>
         <HBox>
             <children>
-                <Region prefHeight="28.0" prefWidth="320.0" HBox.hgrow="ALWAYS">
+                <Region HBox.hgrow="ALWAYS">
                     <HBox.margin>
                         <Insets/>
                     </HBox.margin>
                 </Region>
-                <Button fx:id="btnProximo" defaultButton="true" mnemonicParsing="false" onAction="#handleBtnProximo"
-                        text="Próximo"/>
+                <Button mnemonicParsing="false" onAction="#handleBtnContinuar" styleClass="btn-primary" text="Continuar"/>
             </children>
             <VBox.margin>
                 <Insets top="10.0"/>

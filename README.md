@@ -1,5 +1,5 @@
-# ProfexoSimulator
-Simulador em Técnico de Futebol baseado no Profexô Luxemburgo.
+# Profexo Simulator
+Simulador em Técnico de Futebol baseado no Profexô Luxemburgo utilizando Lógica Fuzzy.
 
 Variáveis do jogo:
 

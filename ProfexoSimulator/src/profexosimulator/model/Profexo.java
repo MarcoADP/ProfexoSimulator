@@ -36,15 +36,44 @@ public class Profexo {
         }
     }
 
+    public enum Tatica {
+        T_343("3-4-3"),
+        T_352("3-5-2"),
+        T_433("4-3-3"),
+        T_442("4-4-2"),
+        T_451("4-5-1"),
+        T_541("5-4-1");
+
+        private String tatica;
+
+        Tatica(String tatica) {
+            this.tatica = tatica;
+        }
+
+        public String getTatica() {
+            return tatica;
+        }
+
+        @Override
+        public String toString() {
+            return tatica;
+        }
+    }
+
     private String nome;
     private Mentalidade mentalide;
-    private String taticaPreferida;
+    private Tatica taticaPreferida;
 
     public Profexo() {
         this.nome = Util.gerarNomeAleatorio();
-        this.mentalide = gerarMentalidadeAleatorio();
-        this.taticaPreferida = Util.gerarTaticaAleatoria();
-        //this.taticaPreferida = "442";
+        this.mentalide = gerarMentalidadeAleatoria();
+        this.taticaPreferida = gerarTaticaAleatoria();
+    }
+
+    public Profexo(String nome, Mentalidade mentalide, Tatica taticaPreferida) {
+        this.nome = nome;
+        this.mentalide = mentalide;
+        this.taticaPreferida = taticaPreferida;
     }
 
     public void mostrarProfexo() {
@@ -53,9 +82,14 @@ public class Profexo {
         System.out.println("");
     }
 
-    private Mentalidade gerarMentalidadeAleatorio() {
+    private Mentalidade gerarMentalidadeAleatoria() {
         Mentalidade[] mentalidades = Mentalidade.values();
         return mentalidades[gerarNumeroAleatorio(mentalidades.length)];
+    }
+
+    private Tatica gerarTaticaAleatoria() {
+        Tatica[] taticas = Tatica.values();
+        return taticas[gerarNumeroAleatorio(taticas.length)];
     }
 
     public String getNome() {
@@ -66,7 +100,7 @@ public class Profexo {
         return mentalide;
     }
 
-    public String getTaticaPreferida() {
+    public Tatica getTaticaPreferida() {
         return taticaPreferida;
     }
 }

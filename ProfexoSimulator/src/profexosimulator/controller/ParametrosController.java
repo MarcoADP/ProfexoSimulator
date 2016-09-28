@@ -1,17 +1,14 @@
 package profexosimulator.controller;
 
 
-import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import profexosimulator.model.Equipe;
 import profexosimulator.model.Profexo;
+import profexosimulator.util.UIUtil;
 import profexosimulator.util.Util;
-
-import java.util.Arrays;
 
 public class ParametrosController {
 
@@ -20,46 +17,50 @@ public class ParametrosController {
     @FXML
     private TextField fieldNomeProfexo;
     @FXML
-    private ChoiceBox choiceMentalidade;
+    private ChoiceBox<Profexo.Mentalidade> choiceMentalidade;
     @FXML
-    private ChoiceBox choiceTatica;
+    private ChoiceBox<Profexo.Tatica> choiceTatica;
     @FXML
     private TextField fieldNomeTime;
-    @FXML
-    private Button btnProximo;
 
     @FXML
     private void initialize() {
-        choiceMentalidade.setItems(FXCollections.observableList(Arrays.asList(Profexo.Mentalidade.values())));
+        choiceMentalidade.getItems().setAll(Profexo.Mentalidade.values());
         choiceMentalidade.getSelectionModel().select(0);
 
-        choiceTatica.setItems(FXCollections.observableList(Arrays.asList(Util.TATICAS)));
+        choiceTatica.getItems().setAll(Profexo.Tatica.values());
         choiceTatica.getSelectionModel().select(0);
     }
 
     @FXML
-    public void handleBtnProximo(ActionEvent actionEvent) {
+    private void handleBtnContinuar() {
+        if (UIUtil.validarFields(fieldNomeProfexo, fieldNomeTime)) {
+            return;
+        }
+
         MainController main = MainController.INSTANCE;
+
+        Profexo profexo = new Profexo(fieldNomeProfexo.getText(), choiceMentalidade.getValue(), choiceTatica.getValue());
+        Equipe equipe = new Equipe(fieldNomeTime.getText(), profexo);
+        main.getSimulador().iniciarEquipes(equipe);
+
+        main.getElencoController().setSimulador(main.getSimulador());
+
         main.proximaTela(main.getElencoController().getRoot());
+    }
+
+    @FXML
+    private void handleBtnNomeProfexoAleatorio() {
+        fieldNomeProfexo.setText(Util.gerarNomeAleatorio());
+    }
+
+    @FXML
+    private void handleBtnNomeTimeAleatorio() {
+        fieldNomeTime.setText(Util.gerarNomeTimeAleatorio());
     }
 
     public VBox getRoot() {
         return root;
     }
 
-    public TextField getFieldNomeProfexo() {
-        return fieldNomeProfexo;
-    }
-
-    public ChoiceBox getChoiceMentalidade() {
-        return choiceMentalidade;
-    }
-
-    public ChoiceBox getChoiceTatica() {
-        return choiceTatica;
-    }
-
-    public TextField getFieldNomeTime() {
-        return fieldNomeTime;
-    }
 }
