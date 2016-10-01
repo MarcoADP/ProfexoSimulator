@@ -36,8 +36,8 @@ public class ElencoController {
         Callback<TableColumn<Jogador, Double>, TableCell<Jogador, Double>> cellFactory = param -> new TableCell<Jogador, Double>() {
             @Override
             public void updateItem(Double value, boolean empty) {
-                super.updateItem(value, empty) ;
-                if (value==null) {
+                super.updateItem(value, empty);
+                if (value == null) {
                     setText(null);
                 } else {
                     setText(String.format("%.2f", value.doubleValue()));
@@ -47,7 +47,6 @@ public class ElencoController {
 
         colAlturaElenco.setCellFactory(cellFactory);
         colAlturaAdversario.setCellFactory(cellFactory);
-
     }
 
     @FXML
@@ -57,7 +56,7 @@ public class ElencoController {
     }
 
     @FXML
-    public void handleBtnProximo() {
+    public void handleBtnContinuar() {
 
     }
 
@@ -74,9 +73,10 @@ public class ElencoController {
     public void setSimulador(Simulador simulador) {
         this.simulador = simulador;
 
+        //tabelaElenco.getItems().addAll(simulador.getEquipeJogador().getPlantel());
         tabelaAdversario.setItems(FXCollections.observableList(simulador.getEquipeAdversario().getPlantel()));
 
-        labelElencoJogador.setText("Elenco - "+simulador.getEquipeJogador().getNome());
-        labelElencoAdversario.setText("Elenco Adversário - "+simulador.getEquipeAdversario().getNome());
+        labelElencoJogador.setText("Elenco - " + simulador.getEquipeJogador().getNome());
+        labelElencoAdversario.setText("Elenco Adversário - " + simulador.getEquipeAdversario().getNome());
     }
 }

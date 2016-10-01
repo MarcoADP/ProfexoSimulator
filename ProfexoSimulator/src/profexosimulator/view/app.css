@@ -19,16 +19,25 @@
 
 .btn-primary {
     -fx-background-color: transparent, linear-gradient(#4081DD, #3668c1);
-    -fx-background-radius: 3;
+    -fx-background-radius: 4px;
     -fx-text-fill: white;
     -fx-font-weight: bold;
-    -fx-border-color: #5D99DA;
+    -fx-border-color: #63aaef;
     -fx-border-width: 1;
-    -fx-border-radius: 3;
+    -fx-border-radius: 4px;
 }
 
 .btn-primary:hover {
     -fx-background-color: transparent, linear-gradient(#418be8, #3672cb);
+}
+
+.btn-primary:armed {
+    -fx-background-color: transparent, linear-gradient(#407bd7, #376cc6);
+}
+
+.btn-primary:focused {
+    -fx-background-radius: 0;
+    -fx-effect: dropshadow(gaussian, #3d7fdf, 3, 0.1, 0, 0);
 }
 
 .field-erro {

@@ -41,26 +41,13 @@ public class Jogador {
     public Jogador(String posicao) {
         this.nome = Util.gerarNomeAleatorio();
         this.posicao = posicao;
-        /*do{
-            this.posicao_secundaria = Util.gerarPosicaoAleatoria();
-        } while(posicao_secundaria.equals(posicao));*/
-
         this.idade = Util.gerarNumeroAleatorio(17, 40);
         this.altura = Util.gerarDoubleAleatorio(1.67, 2.00);
         this.overall = this.calcularOverall();
     }
 
     public Jogador() {
-        this.nome = Util.gerarNomeAleatorio();
-        this.posicao = Util.gerarPosicaoAleatoria();
-        /*do{
-            this.posicao_secundaria = Util.gerarPosicaoAleatoria();
-        } while(posicao_secundaria.equals(posicao));*/
-
-        this.idade = Util.gerarNumeroAleatorio(17, 40);
-        this.altura = Util.gerarNumeroAleatorio(167, 200);
-        this.overall = this.calcularOverall();
-
+        this(Util.gerarPosicaoAleatoria());
     }
 
     public void calcularAtributos(int maxDefesa, int maxOfensivo, int maxPsicologico, int maxFisico) {
@@ -107,13 +94,6 @@ public class Jogador {
                 maxPsicologico = ATR_REGULAR; //36
                 maxFisico = ATR_OTIMO; // 60 -> 186
                 break;
-                
-            /*case "Libero":
-                maxDefesa = ATR_OTIMO; // 60
-                maxOfensivo = ATR_RUIM; //30
-                maxPsicologico = ATR_BOM; //48
-                maxFisico = ATR_BOM; //48 186
-                break;*/
 
             case "Lateral":
                 maxDefesa = ATR_BOM;
@@ -177,6 +157,7 @@ public class Jogador {
         int pesoOfensivo = 0;
         int pesoPsicologico = 0;
         int pesoFisico = 0;
+
         switch (this.posicao) {
             case "Goleiro":
                 pesoDefesa = 4;
@@ -191,13 +172,6 @@ public class Jogador {
                 pesoPsicologico = 3;
                 pesoFisico = 3;
                 break;
-                
-            /*case "Libero":
-                pesoDefesa = 3;
-                pesoOfensivo = 1;
-                pesoPsicologico = 3;
-                pesoFisico = 3;
-                break;*/
 
             case "Lateral":
                 pesoDefesa = 3;
@@ -293,85 +267,49 @@ public class Jogador {
         System.out.println("");
     }
 
-    public int getOverall() {
-        return overall;
+    @Override
+    public String toString() {
+        return nome + " - " + posicao + " - " + overall;
     }
 
-    public void setOverall(int overall) {
-        this.overall = overall;
+    public int getOverall() {
+        return overall;
     }
 
     public int getDefesa() {
         return defesa;
     }
 
-    public void setDefesa(int defesa) {
-        this.defesa = defesa;
-    }
-
     public int getAtaque() {
         return ataque;
-    }
-
-    public void setAtaque(int ataque) {
-        this.ataque = ataque;
     }
 
     public int getDominio() {
         return dominio;
     }
 
-    public void setDominio(int dominio) {
-        this.dominio = dominio;
-    }
-
     public int getChute() {
         return chute;
-    }
-
-    public void setChute(int chute) {
-        this.chute = chute;
     }
 
     public int getPasse() {
         return passe;
     }
 
-    public void setPasse(int passe) {
-        this.passe = passe;
-    }
-
     public int getReflexo() {
         return reflexo;
-    }
-
-    public void setReflexo(int reflexo) {
-        this.reflexo = reflexo;
     }
 
     public int getMental() {
         return mental;
     }
 
-    public void setMental(int mental) {
-        this.mental = mental;
-    }
-
-
     public String getNome() {
         return nome;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
     public int getIdade() {
         return idade;
-    }
-
-    public void setIdade(int idade) {
-        this.idade = idade;
     }
 
     public double getAltura() {
@@ -381,18 +319,5 @@ public class Jogador {
     public String getPosicao() {
         return posicao;
     }
-
-    public void setPosicao(String posicao) {
-        this.posicao = posicao;
-    }
-
-    /*public String getPosicao_secundaria() {
-        return posicao_secundaria;
-    }
-
-    public void setPosicao_secundaria(String posicao_secundaria) {
-        this.posicao_secundaria = posicao_secundaria;
-    }*/
-
 
 }

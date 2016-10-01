@@ -5,10 +5,10 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
@@ -25,6 +25,7 @@ public class MainController {
     @FXML
     private ParametrosController parametrosController;
     private ElencoController elencoController;
+    private SobreController sobreController;
 
     public static MainController INSTANCE;
 
@@ -34,21 +35,28 @@ public class MainController {
     private void initialize() {
         INSTANCE = this;
         simulador = new Simulador();
-        inicializarControllerJogadores();
+
+        elencoController = inicializarController("../view/elenco.fxml");
+        sobreController = inicializarController("../view/sobre.fxml");
     }
 
     @FXML
-    public void handleMenuItemSair(ActionEvent actionEvent) {
+    public void handleMenuItemSair() {
         Platform.exit();
     }
 
     @FXML
-    public void handleMenuItemSobre(ActionEvent actionEvent) {
-
+    public void handleMenuItemSobre() {
+        Alert sobre = new Alert(Alert.AlertType.INFORMATION);
+        sobre.setTitle("Sobre");
+        sobre.setHeaderText(null);
+        sobre.setGraphic(null);
+        sobre.getDialogPane().setContent(sobreController.getRoot());
+        sobre.showAndWait();
     }
 
     @FXML
-    public void handleMenuItemNovoJogo(ActionEvent actionEvent) {
+    public void handleMenuItemNovoJogo() {
         ProfexoSimulator.novoJogo();
     }
 
@@ -80,14 +88,14 @@ public class MainController {
         slide.play();
     }
 
-    private void inicializarControllerJogadores() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/elenco.fxml"));
+    private <T> T inicializarController(String fxml_path) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml_path));
         try {
-            Pane pane = loader.load();
+            loader.load();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        elencoController = loader.getController();
+        return loader.getController();
     }
 
     public ParametrosController getParametrosController() {

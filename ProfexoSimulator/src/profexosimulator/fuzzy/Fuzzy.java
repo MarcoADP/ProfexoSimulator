@@ -19,7 +19,8 @@ import net.sourceforge.jFuzzyLogic.FunctionBlock;
  * @author pcingola@users.sourceforge.net
  */
 public class Fuzzy {
-    public void teste() throws Exception {
+    public static void main(String[] args) {
+
         // Load from 'FCL' file
         String fileName = "tipper.fcl";
         FIS fis = FIS.load(fileName,true);
@@ -38,7 +39,6 @@ public class Fuzzy {
         fis.setVariable("Qualidade_Time", 1);
         fis.setVariable("Qualidade_Adversario", 10);
         fis.setVariable("Estadio", 7);
-        
 
         // Evaluate
         fis.evaluate();
@@ -46,6 +46,7 @@ public class Fuzzy {
         // Show output variable's chart
         Variable Possibilidade = functionBlock.getVariable("Possibilidade");
         JFuzzyChart.get().chart(Possibilidade, Possibilidade.getDefuzzifier(), true);
+
         //functionBlock.getVariable("tip").chartDeFuzzifier(true);
 
         // Print ruleSet

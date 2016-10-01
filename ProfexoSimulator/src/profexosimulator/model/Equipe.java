@@ -1,7 +1,8 @@
 package profexosimulator.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.IntStream;
+
 import profexosimulator.model.Profexo.Mentalidade;
 
 public class Equipe {
@@ -38,28 +39,11 @@ public class Equipe {
         this.escalacao = new ArrayList<>(11);
     }
 
-    public Equipe(String nome, Profexo profexo, int goleiro, int zagueiro, int lateral, int volante, int meia, int armador, int ponta, int atacante, int centroavante) {
-        this.nome = nome;
-        this.profexo = profexo;
-        this.numGoleiro = goleiro;
-        this.numZagueiro = zagueiro;
-        this.numLateral = lateral;
-        this.numVolante = volante;
-        this.numMeia = meia;
-        this.numArmador = armador;
-        this.numPonta = ponta;
-        this.numAtacante = atacante;
-        this.numCentroAvante = centroavante;
-
-        this.overallEquipe = this.calcularOverallEquipe();
-
-    }
-
     public void escalarTime() {
         this.taticaAtual = this.profexo.getTaticaPreferida().getTatica();
         this.mentalidadeAtual = this.profexo.getMentalide();
-        //System.out.println("Tatica: " + this.taticaAtual);
         this.escalarJogador("Goleiro");
+
         switch (this.taticaAtual.charAt(0)) {
             case '3':
                 this.escalarJogador("Zagueiro");
@@ -125,52 +109,30 @@ public class Equipe {
     }
 
     private void escalarJogador(String posicao) {
-        Jogador escolhido = null;
-        for (Jogador jogador : this.plantel) {
-            if (jogador.getPosicao().equals(posicao)) {
-                if (escolhido == null || jogador.getOverall() > escolhido.getOverall()) {
-                    if (!isEscalado(jogador)) {
-                        escolhido = jogador;
-                    }
-                }
+        Optional<Jogador> escolhido = plantel.stream()
+                .filter(jogador -> jogador.getPosicao().equals(posicao))
+                .filter(jogador -> !isEscalado(jogador))
+                .max(Comparator.comparing(Jogador::getOverall));
 
-            }
-        }
-        //System.out.println(escolhido.getNome());
-        this.escalacao.add(escolhido);
+        escolhido.ifPresent(jogador -> escalacao.add(jogador)); // Adiciona jogador escolhido se estiver presente (diferente de null)
     }
 
     private boolean isEscalado(Jogador jogador) {
-        if (this.escalacao.isEmpty()) {
-            return false;
-        }
-        for (Jogador jog1 : this.escalacao) {
-            if (jog1.equals(jogador)) {
-                return true;
-            }
-        }
-        return false;
+        return escalacao.contains(jogador);
     }
 
     private int calcularOverallEquipe() {
-        int soma = 0;
-        for (Jogador jogador : this.plantel) {
-            soma += jogador.getOverall();
-        }
-        //System.out.println("EQUIPE: " + this.numElenco + " TAMANHO: " + this.plantel.size());
-        soma = soma / this.plantel.size();
-        return soma;
+        OptionalDouble media = plantel.stream().mapToInt(Jogador::getOverall).average();
+        return (int) media.orElse(0.0); // Retorna a média calculada OU 0.0 se o valor não estiver presente
     }
 
     public void formarElenco() {
-
         this.numElenco = this.numGoleiro + this.numZagueiro + this.numLateral + this.numVolante + this.numMeia + this.numArmador + this.numPonta + this.numAtacante + this.numCentroAvante;
         this.plantel = new ArrayList<>();
 
         this.adicionarJogador("Goleiro", numGoleiro); //2
 
         this.adicionarJogador("Zagueiro", numZagueiro);
-        //this.adicionarJogador("Libero", 2);
         this.adicionarJogador("Lateral", numLateral); //8 //10
 
         this.adicionarJogador("Volante", numVolante);
@@ -185,9 +147,7 @@ public class Equipe {
     }
 
     public void adicionarJogador(String posicao, int quantidade) {
-        int i;
-        for (i = 0; i < quantidade; i++) {
-            //System.out.println(posicao + "  " + this.plantel.size());
+        for (int i = 0; i < quantidade; i++) {
             this.plantel.add(new Jogador(posicao));
         }
     }
@@ -197,33 +157,17 @@ public class Equipe {
         System.out.println("Capacidade: " + this.overallEquipe);
         this.profexo.mostrarProfexo();
         this.mostrarEscalacao();
-        //this.mostrarElenco();
     }
 
     public void mostrarEscalacao() {
         System.out.println("Tatica:" + this.taticaAtual);
         System.out.println("Mentalidade: " + this.mentalidadeAtual);
-        System.out.println("");
-        //String posAnterior = "Goleiro";
-        if (!this.escalacao.isEmpty()) {
-            for (Jogador jogador : this.escalacao) {
-                /*if(!posAnterior.equals(jogador.getPosicao())){
-                    System.out.println("");
-                }*/
-                //posAnterior = jogador.getPosicao();
-                System.out.println(jogador.getPosicao() + ": " + jogador.getNome() + " " + jogador.getOverall());
-            }
-        }
+        System.out.println();
+        escalacao.forEach(System.out::println);
     }
 
     public void mostrarElenco() {
-        int i;
-
-        for (Jogador jogador : plantel) {
-            // System.out.println("Nome: " + jogador.getNome() + "\tPosicao: " + jogador.getPosicao() +
-            //         "\tOverall: "+ jogador.getOverall());
-            jogador.mostrarAtributos();
-        }
+        plantel.forEach(Jogador::mostrarAtributos);
     }
 
     public List<Jogador> getPlantel() {
@@ -234,7 +178,15 @@ public class Equipe {
         return nome;
     }
 
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
     public Profexo getProfexo() {
         return profexo;
+    }
+
+    public void setProfexo(Profexo profexo) {
+        this.profexo = profexo;
     }
 }

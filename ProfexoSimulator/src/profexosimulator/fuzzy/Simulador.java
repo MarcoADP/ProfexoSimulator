@@ -14,7 +14,12 @@ public class Simulador {
     }
 
     public void iniciarEquipes(Equipe equipeJogador) {
-        this.equipeJogador = equipeJogador;
+        if (this.equipeJogador == null) {
+            this.equipeJogador = equipeJogador;
+        } else {
+            this.equipeJogador.setProfexo(equipeJogador.getProfexo());
+            this.equipeJogador.setNome(equipeJogador.getNome());
+        }
 
         if (equipeAdversario == null) {
             equipeAdversario = new Equipe(Util.gerarNomeTimeAleatorio(), new Profexo());

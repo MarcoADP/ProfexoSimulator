@@ -76,7 +76,7 @@
                 <Button mnemonicParsing="false" text="Gerar Elenco" onAction="#handleBtnGerarElenco"/>
                 <Region HBox.hgrow="ALWAYS"/>
                 <Button mnemonicParsing="false" onAction="#handleBtnVoltar" text="Voltar"/>
-                <Button mnemonicParsing="false" text="Próximo" styleClass="btn-primary" onAction="#handleBtnProximo"/>
+                <Button mnemonicParsing="false" text="Continuar" styleClass="btn-primary" onAction="#handleBtnContinuar"/>
             </children>
             <VBox.margin>
                 <Insets top="10.0"/>
