@@ -19,10 +19,10 @@ import net.sourceforge.jFuzzyLogic.FunctionBlock;
  * @author pcingola@users.sourceforge.net
  */
 public class Fuzzy {
-    public static void main(String[] args) {
+    public void calculo() {
 
         // Load from 'FCL' file
-        String fileName = "tipper.fcl";
+        String fileName = "futebol.fcl";
         FIS fis = FIS.load(fileName,true);
 
         // Error while loading?
@@ -37,8 +37,9 @@ public class Fuzzy {
 
         // Set inputs
         fis.setVariable("Qualidade_Time", 1);
-        fis.setVariable("Qualidade_Adversario", 10);
-        fis.setVariable("Estadio", 7);
+        fis.setVariable("Qualidade_Adversario", 5);
+        fis.setVariable("Estadio", 5);
+        fis.setVariable("Torcida", 5);
 
         // Evaluate
         fis.evaluate();
