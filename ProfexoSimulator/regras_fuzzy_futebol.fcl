@@ -1,0 +1,97 @@
+
+FUNCTION_BLOCK profexo
+
+// Define variáveis de entrada
+VAR_INPUT
+	Qualidade_Time : REAL;
+	Qualidade_Adversario : REAL;
+	Estadio : REAL;
+	Torcida: REAL;
+END_VAR
+
+// Define variáveis de saída
+VAR_OUTPUT
+	Possibilidade : REAL;
+END_VAR
+
+// Fuzzify variável de entrada 'Qualidade_Time': {'pessimo', 'ruim' , 'regular', 'bom', 'otimo'}
+FUZZIFY Qualidade_Time			
+	TERM pessimo := (1, 1) (3, 0);
+	TERM ruim := (1, 0) (2, 1) (3, 0);
+	TERM regular := (2, 0) (3,1) (4,0);
+	TERM bom := (3, 0) (4, 1) (5, 0);
+	TERM otimo := (3,0) (5,1);
+END_FUZZIFY
+
+// Fuzzify variável de entrada 'Qualidade_Adversario': {  'juvenil', 'amador', 'normal', 'dificil', 'alemanha'}
+FUZZIFY Qualidade_Adversario			
+	TERM juvenil := (1, 1) (3, 0);
+	TERM amador := (1, 0) (2, 1) (3, 0);
+	TERM normal := (2, 0) (3,1) (4,0);
+	TERM dificil := (3, 0) (4, 1) (5, 0);
+	TERM alemanha := (3,0) (5,1);
+END_FUZZIFY
+
+// Fuzzify variável de entrada 'Estadio': { 'varzea', 'ruim', 'jogavel', 'bom', 'tapete'}
+FUZZIFY Estadio			
+	TERM varzea := (1, 1) (3, 0);
+	TERM ruim := (1, 0) (2, 1) (3, 0);
+	TERM jogavel := (2, 0) (3,1) (4,0);
+	TERM bom := (3, 0) (4, 1) (5, 0);
+	TERM tapete := (3,0) (5,1);
+END_FUZZIFY
+
+// Fuzzify variável de entrada 'Torcida': { 'pessimo', 'ruim' , 'regular', 'bom', 'otimo'}
+FUZZIFY Torcida			
+	TERM pessimo := (1, 1) (3, 0);
+	TERM ruim := (1, 0) (2, 1) (3, 0);
+	TERM regular := (2, 0) (3,1) (4,0);
+	TERM bom := (3, 0) (4, 1) (5, 0);
+	TERM otimo := (3,0) (5,1);
+END_FUZZIFY
+
+
+// Defuzzify variável de saída 'Possibilidade' : {'derrota', 'empate', 'vitoria' }
+DEFUZZIFY Possibilidade			
+	TERM derrota := (0,1) (2,1) (5,0);
+	TERM empate := (0,0) (1,0) (4, 1) (6,1) (9,0);
+	TERM vitoria := (0,0) (5,0) (8,1) (10, 1);
+	METHOD : COG;		// Usa o métodod de Defuzzificação 'Center of Gravity' (Centro de Gravidade)
+	DEFAULT := 0;		// Valor padrão é 0 (se nenhuma regra ativar o defuzzificador)
+END_DEFUZZIFY
+
+// Regras de inferência
+RULEBLOCK No1
+	AND : MIN;	// Use 'min' for 'and'
+	ACT : MIN;	// Use 'min' activation method
+	ACCU : MAX;	// Use 'max' accumulation method
+	
+	RULE 1 : IF Qualidade_Time IS otimo AND NOT Qualidade_Adversario IS alemanha THEN Possibilidade IS vitoria;
+	RULE 2 : IF Qualidade_Time IS otimo AND Qualidade_Adversario IS alemanha THEN Possibilidade IS empate;
+	
+	RULE 3 : IF Qualidade_Time IS bom AND Qualidade_Adversario IS alemanha THEN Possibilidade IS derrota;
+	RULE 4 : IF Qualidade_Time IS bom AND Qualidade_Adversario IS dificil THEN Possibilidade IS empate;
+	RULE 5 : IF Qualidade_Time IS bom AND Qualidade_Adversario IS NOT alemanha AND Qualidade_Adversario IS NOT dificil THEN Possibilidade IS vitoria;
+	
+	RULE 6 : IF Qualidade_Time IS regular AND Qualidade_Adversario IS alemanha OR Qualidade_Adversario IS dificil THEN Possibilidade IS derrota;
+	RULE 7 : IF Qualidade_Time IS regular AND Qualidade_Adversario IS normal THEN Possibilidade IS empate;
+	RULE 8 : IF Qualidade_Time IS regular AND Qualidade_Adversario IS amador OR Qualidade_Adversario IS juvenil THEN Possibilidade is vitoria;
+	
+	RULE 9 : IF Qualidade_Time IS ruim AND Qualidade_Adversario IS NOT juvenil AND Qualidade_Adversario IS NOT amador THEN Possibilidade IS derrota;
+	RULE 10 : IF Qualidade_Time IS ruim AND Qualidade_Adversario IS amador THEN Possibilidade IS empate;
+	RULE 11 : IF Qualidade_Time IS ruim AND Qualidade_Adversario IS juvenil THEN Possibilidade is vitoria;
+	
+	RULE 12 : IF Qualidade_Time IS pessimo AND Qualidade_Adversario IS NOT juvenil THEN Possibilidade IS derrota;
+	RULE 13 : IF Qualidade_Time IS pessimo AND Qualidade_Adversario IS juvenil THEN Possibilidade IS empate;
+	
+	RULE 14 : IF Estadio IS varzea OR Estadio IS ruim THEN Possibilidade IS derrota;
+	RULE 15 : IF Estadio IS jogavel THEN Possibilidade IS empate;
+	RULE 16 : IF Estadio IS bom OR Estadio IS tapete THEN Possibilidade IS vitoria;
+	
+	RULE 17 : IF Torcida IS pessimo OR Torcida IS ruim THEN Possibilidade IS derrota;
+	RULE 18 : IF Torcida IS regular THEN Possibilidade IS empate;
+	RULE 19 : IF Torcida IS bom OR Torcida IS otimo THEN Possibilidade IS vitoria;
+	
+END_RULEBLOCK
+
+END_FUNCTION_BLOCK

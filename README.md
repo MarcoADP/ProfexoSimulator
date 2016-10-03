@@ -31,9 +31,3 @@ Qualidade da Torcida:
     4:  LOTA ESTÁDIOS (BOA)
     5:  90 MINUTOS EM PÉ (ÓTIMO)
     
-Mentalidade do Time:
-    1:  CELSO ROTH (RETRANCA)
-    2:  DEFENSIVO
-    3:  NORMAL
-    4:  CONTROLE
-    5:  OFENSIVA

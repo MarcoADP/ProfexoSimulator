@@ -11,6 +11,8 @@ import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import profexosimulator.fuzzy.Simulador;
 import profexosimulator.model.Jogador;
+import profexosimulator.util.UIUtil;
+import sun.applet.Main;
 
 public class ElencoController {
 
@@ -33,17 +35,7 @@ public class ElencoController {
 
     @FXML
     public void initialize() {
-        Callback<TableColumn<Jogador, Double>, TableCell<Jogador, Double>> cellFactory = param -> new TableCell<Jogador, Double>() {
-            @Override
-            public void updateItem(Double value, boolean empty) {
-                super.updateItem(value, empty);
-                if (value == null) {
-                    setText(null);
-                } else {
-                    setText(String.format("%.2f", value.doubleValue()));
-                }
-            }
-        };
+        Callback<TableColumn<Jogador, Double>, TableCell<Jogador, Double>> cellFactory = UIUtil.getCellFactory();
 
         colAlturaElenco.setCellFactory(cellFactory);
         colAlturaAdversario.setCellFactory(cellFactory);
@@ -57,7 +49,12 @@ public class ElencoController {
 
     @FXML
     public void handleBtnContinuar() {
+        if (tabelaElenco.getItems().isEmpty()) {
+            return;
+        }
 
+        MainController main = MainController.INSTANCE;
+        main.proximaTela(main.getPartidaController().getRoot());
     }
 
     @FXML
@@ -73,7 +70,7 @@ public class ElencoController {
     public void setSimulador(Simulador simulador) {
         this.simulador = simulador;
 
-        //tabelaElenco.getItems().addAll(simulador.getEquipeJogador().getPlantel());
+        //tabelaEscalacao.getItems().addAll(simulador.getEquipeJogador().getPlantel());
         tabelaAdversario.setItems(FXCollections.observableList(simulador.getEquipeAdversario().getPlantel()));
 
         labelElencoJogador.setText("Elenco - " + simulador.getEquipeJogador().getNome());

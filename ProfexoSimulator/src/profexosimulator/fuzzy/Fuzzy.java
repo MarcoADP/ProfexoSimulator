@@ -1,56 +1,49 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package profexosimulator.fuzzy;
 
-//package net.sourceforge.jFuzzyLogic.test;
-
 import net.sourceforge.jFuzzyLogic.FIS;
-import net.sourceforge.*;
 import net.sourceforge.jFuzzyLogic.plot.JFuzzyChart;
 import net.sourceforge.jFuzzyLogic.rule.Variable;
-import net.sourceforge.jFuzzyLogic.FunctionBlock;
-//import net.sourceforge.jFuzzyLogic.rule.FuzzyRuleSet;
 
-/**
- * Test parsing an FCL file
- * @author pcingola@users.sourceforge.net
- */
 public class Fuzzy {
-    public void calculo() {
 
-        // Load from 'FCL' file
-        String fileName = "futebol.fcl";
-        FIS fis = FIS.load(fileName,true);
+    public static final String NOME_ARQUIVO = "regras_fuzzy_futebol.fcl";
 
-        // Error while loading?
-        if( fis == null ) { 
-            System.err.println("Can't load file: '" + fileName + "'");
+    public static final String VAR_INPUT_QUALIDADE_TIME = "Qualidade_Time";
+    public static final String VAR_INPUT_QUALIDADE_ADVERSARIO = "Qualidade_Adversario";
+    public static final String VAR_INPUT_QUALIDADE_ESTADIO = "Estadio";
+    public static final String VAR_INPUT_QUALIDADE_TORCIDA = "Torcida";
+    public static final String VAR_OUTPUT_POSSIBILIDADE = "Possibilidade";
+
+    private FIS fis;
+
+    public Fuzzy() {
+        fis = FIS.load(NOME_ARQUIVO);
+
+        if (fis == null) {
+            System.out.println("Não foi possível abrir o arquivo: " + NOME_ARQUIVO);
+        }
+    }
+
+    public void executar(double qualidadeTime, double qualidadeAdversario, double estadio, double torcida) {
+        if (fis == null) {
             return;
         }
 
-        // Show 
-        FunctionBlock functionBlock = fis.getFunctionBlock(null);
-        JFuzzyChart.get().chart(functionBlock);
+        fis.setVariable(VAR_INPUT_QUALIDADE_TIME, qualidadeTime);
+        fis.setVariable(VAR_INPUT_QUALIDADE_ADVERSARIO, qualidadeAdversario);
+        fis.setVariable(VAR_INPUT_QUALIDADE_ESTADIO, estadio);
+        fis.setVariable(VAR_INPUT_QUALIDADE_TORCIDA, torcida);
 
-        // Set inputs
-        fis.setVariable("Qualidade_Time", 1);
-        fis.setVariable("Qualidade_Adversario", 5);
-        fis.setVariable("Estadio", 5);
-        fis.setVariable("Torcida", 5);
-
-        // Evaluate
         fis.evaluate();
+    }
 
-        // Show output variable's chart
-        Variable Possibilidade = functionBlock.getVariable("Possibilidade");
-        JFuzzyChart.get().chart(Possibilidade, Possibilidade.getDefuzzifier(), true);
+    public void mostrarGraficoVariavel(String variavel) {
+        Variable var = fis.getVariable(variavel);
+        JFuzzyChart.get().chart(var, true);
+    }
 
-        //functionBlock.getVariable("tip").chartDeFuzzifier(true);
-
-        // Print ruleSet
-        System.out.println(fis);
+    public void mostrarGraficoDefuzzy(String varDefuzzy) {
+        Variable var = fis.getVariable(varDefuzzy);
+        JFuzzyChart.get().chart(var, var.getDefuzzifier(), true);
     }
 }

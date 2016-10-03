@@ -9,8 +9,10 @@ public class Simulador {
     private Equipe equipeJogador;
     private Equipe equipeAdversario;
 
-    public Simulador() {
+    private Fuzzy fuzzy;
 
+    public Simulador() {
+        fuzzy = new Fuzzy();
     }
 
     public void iniciarEquipes(Equipe equipeJogador) {
@@ -32,5 +34,9 @@ public class Simulador {
 
     public Equipe getEquipeAdversario() {
         return equipeAdversario;
+    }
+
+    public Fuzzy getFuzzy() {
+        return fuzzy;
     }
 }

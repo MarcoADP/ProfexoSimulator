@@ -26,6 +26,7 @@ public class MainController {
     private ParametrosController parametrosController;
     private ElencoController elencoController;
     private SobreController sobreController;
+    private PartidaController partidaController;
 
     public static MainController INSTANCE;
 
@@ -38,6 +39,7 @@ public class MainController {
 
         elencoController = inicializarController("../view/elenco.fxml");
         sobreController = inicializarController("../view/sobre.fxml");
+        partidaController = inicializarController("../view/partida.fxml");
     }
 
     @FXML
@@ -46,7 +48,7 @@ public class MainController {
     }
 
     @FXML
-    public void handleMenuItemSobre() {
+    private void handleMenuItemSobre() {
         Alert sobre = new Alert(Alert.AlertType.INFORMATION);
         sobre.setTitle("Sobre");
         sobre.setHeaderText(null);
@@ -56,7 +58,7 @@ public class MainController {
     }
 
     @FXML
-    public void handleMenuItemNovoJogo() {
+    private void handleMenuItemNovoJogo() {
         ProfexoSimulator.novoJogo();
     }
 
@@ -77,12 +79,12 @@ public class MainController {
         double width = borderPane.getWidth();
 
         KeyFrame start = new KeyFrame(Duration.ZERO,
-                new KeyValue(novo.translateXProperty(), width*fator),
+                new KeyValue(novo.translateXProperty(), width * fator),
                 new KeyValue(antigo.translateXProperty(), 0));
 
         KeyFrame end = new KeyFrame(Duration.seconds(0.2),
                 new KeyValue(novo.translateXProperty(), 0),
-                new KeyValue(antigo.translateXProperty(), -width*fator));
+                new KeyValue(antigo.translateXProperty(), -width * fator));
 
         Timeline slide = new Timeline(start, end);
         slide.play();
@@ -104,6 +106,10 @@ public class MainController {
 
     public ElencoController getElencoController() {
         return elencoController;
+    }
+
+    public PartidaController getPartidaController() {
+        return partidaController;
     }
 
     public Simulador getSimulador() {

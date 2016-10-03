@@ -1,9 +1,8 @@
 package profexosimulator.model;
 
-import java.util.*;
-import java.util.stream.IntStream;
-
 import profexosimulator.model.Profexo.Mentalidade;
+
+import java.util.*;
 
 public class Equipe {
 

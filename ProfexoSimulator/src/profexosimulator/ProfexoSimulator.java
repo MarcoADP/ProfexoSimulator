@@ -6,9 +6,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.net.URL;
-import profexosimulator.fuzzy.Fuzzy;
-
 public class ProfexoSimulator extends Application {
 
     public static final String TITULO = "Profexô Simulator";
@@ -49,9 +46,7 @@ public class ProfexoSimulator extends Application {
     }
 
     public static void main(String[] args) {
-        //launch(args);
-        Fuzzy f = new Fuzzy();
-        f.calculo();
+        launch(args);
     }
 
 }
