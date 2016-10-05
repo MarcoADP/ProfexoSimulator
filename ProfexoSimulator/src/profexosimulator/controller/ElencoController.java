@@ -21,15 +21,9 @@ public class ElencoController {
     @FXML
     public TableView<Jogador> tabelaElenco;
     @FXML
-    public TableView<Jogador> tabelaAdversario;
-    @FXML
     public TableColumn colAlturaElenco;
     @FXML
-    public TableColumn colAlturaAdversario;
-    @FXML
     public Label labelElencoJogador;
-    @FXML
-    public Label labelElencoAdversario;
 
     private Simulador simulador;
 
@@ -38,7 +32,6 @@ public class ElencoController {
         Callback<TableColumn<Jogador, Double>, TableCell<Jogador, Double>> cellFactory = UIUtil.getCellFactory();
 
         colAlturaElenco.setCellFactory(cellFactory);
-        colAlturaAdversario.setCellFactory(cellFactory);
     }
 
     @FXML
@@ -70,10 +63,6 @@ public class ElencoController {
     public void setSimulador(Simulador simulador) {
         this.simulador = simulador;
 
-        //tabelaEscalacao.getItems().addAll(simulador.getEquipeJogador().getPlantel());
-        tabelaAdversario.setItems(FXCollections.observableList(simulador.getEquipeAdversario().getPlantel()));
-
         labelElencoJogador.setText("Elenco - " + simulador.getEquipeJogador().getNome());
-        labelElencoAdversario.setText("Elenco Adversário - " + simulador.getEquipeAdversario().getNome());
     }
 }

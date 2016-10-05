@@ -17,6 +17,31 @@
     -fx-font-size: 28;
 }
 
+.h2 {
+    -fx-font-size: 18;
+    /*-fx-font-weight: bold;*/
+}
+
+.label-result {
+    -fx-font-size: 1;
+}
+
+.color-green {
+    -fx-text-fill: green;
+}
+
+.color-red {
+    -fx-text-fill: red;
+}
+
+.titled-pane > .title {
+    -fx-background-color: transparent;
+}
+
+.titled-pane {
+    -fx-border-width: 0;
+}
+
 .btn-primary {
     -fx-background-color: transparent, linear-gradient(#4081DD, #3668c1);
     -fx-background-radius: 4px;

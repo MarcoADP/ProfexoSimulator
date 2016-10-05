@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import javafx.scene.control.cell.PropertyValueFactory?>
+
 <VBox fx:id="root" spacing="10.0" styleClass="elenco" xmlns="http://javafx.com/javafx/8.0.76-ea"
       xmlns:fx="http://javafx.com/fxml/1" fx:controller="profexosimulator.controller.ElencoController">
     <children>
@@ -28,33 +29,6 @@
                                 </TableColumn>
                                 <TableColumn minWidth="50.0" prefWidth="50.0" text="Altura" fx:id="colAlturaElenco">
                                     <cellValueFactory><PropertyValueFactory property="altura" /></cellValueFactory>
-                                </TableColumn>
-                                <TableColumn minWidth="120.0" prefWidth="120.0" text="Posição">
-                                    <cellValueFactory><PropertyValueFactory property="posicao" /></cellValueFactory>
-                                </TableColumn>
-                                <TableColumn prefWidth="75.0" text="Overall">
-                                    <cellValueFactory><PropertyValueFactory property="overall" /></cellValueFactory>
-                                </TableColumn>
-                            </columns>
-                        </TableView>
-                    </children>
-                    <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
-                    </padding>
-                </VBox>
-                <VBox layoutX="10.0" layoutY="10.0" spacing="10.0" styleClass="painel" HBox.hgrow="SOMETIMES">
-                    <children>
-                        <Label fx:id="labelElencoAdversario" styleClass="h1" text="Elenco Adversário"/>
-                        <TableView VBox.vgrow="SOMETIMES" fx:id="tabelaAdversario">
-                            <columns>
-                                <TableColumn minWidth="150.0" prefWidth="150.0" text="Nome">
-                                    <cellValueFactory><PropertyValueFactory property="nome" /></cellValueFactory>
-                                </TableColumn>
-                                <TableColumn minWidth="50.0" prefWidth="50.0" text="Idade">
-                                    <cellValueFactory><PropertyValueFactory property="idade" /></cellValueFactory>
-                                </TableColumn>
-                                <TableColumn minWidth="50.0" prefWidth="50.0" text="Altura" fx:id="colAlturaAdversario">
-                                    <cellValueFactory><PropertyValueFactory property="altura"/></cellValueFactory>
                                 </TableColumn>
                                 <TableColumn minWidth="120.0" prefWidth="120.0" text="Posição">
                                     <cellValueFactory><PropertyValueFactory property="posicao" /></cellValueFactory>

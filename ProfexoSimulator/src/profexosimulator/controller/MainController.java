@@ -40,6 +40,8 @@ public class MainController {
         elencoController = inicializarController("../view/elenco.fxml");
         sobreController = inicializarController("../view/sobre.fxml");
         partidaController = inicializarController("../view/partida.fxml");
+
+        partidaController.setSimulador(simulador);
     }
 
     @FXML
