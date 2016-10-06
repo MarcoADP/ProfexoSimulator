@@ -28,6 +28,6 @@
         </MenuBar>
     </top>
     <center>
-        <fx:include fx:id="parametros" source="parametros.fxml" />
+        <fx:include fx:id="partida" source="partida.fxml" />
     </center>
 </BorderPane>

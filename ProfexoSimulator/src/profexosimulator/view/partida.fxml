@@ -12,102 +12,111 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="root" spacing="10.0" styleClass="elenco" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="profexosimulator.controller.PartidaController">
+<VBox fx:id="root" spacing="10.0" styleClass="elenco" xmlns="http://javafx.com/javafx/8.0.76-ea"
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="profexosimulator.controller.PartidaController">
     <children>
         <VBox spacing="10.0" styleClass="painel">
             <children>
-                <Label styleClass="h2" text="Variáveis" />
+                <Label styleClass="h2" text="Variáveis"/>
                 <GridPane>
                     <columnConstraints>
-                        <ColumnConstraints halignment="LEFT" hgrow="NEVER" maxWidth="230.0" minWidth="10.0" prefWidth="150.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                        <ColumnConstraints halignment="LEFT" hgrow="NEVER" maxWidth="230.0" minWidth="10.0"
+                                           prefWidth="150.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"/>
                     </columnConstraints>
                     <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="25.0" minHeight="6.0" prefHeight="9.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints maxHeight="25.0" minHeight="6.0" prefHeight="9.0" vgrow="SOMETIMES"/>
                     </rowConstraints>
                     <children>
-                        <Label text="Qualidade Time: " />
-                        <ChoiceBox fx:id="choiceQualidadeTime" prefWidth="150.0" GridPane.columnIndex="1" GridPane.columnSpan="2" />
-                        <Label text="Qualidade Adverśario:" GridPane.rowIndex="1" />
-                        <ChoiceBox fx:id="choiceQualidadeAdversario" prefWidth="150.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1" />
-                        <Label text="Qualidade Estádio:" GridPane.rowIndex="2" />
-                        <ChoiceBox fx:id="choiceEstadio" prefWidth="150.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2" />
-                        <Label text="Qualidade Torcida:" GridPane.rowIndex="3" />
-                        <ChoiceBox fx:id="choiceTorcida" prefWidth="150.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+                        <Label text="Qualidade Time: "/>
+                        <ChoiceBox fx:id="choiceQualidadeTime" prefWidth="150.0" GridPane.columnIndex="1"
+                                   GridPane.columnSpan="2"/>
+                        <Label text="Qualidade Adverśario:" GridPane.rowIndex="1"/>
+                        <ChoiceBox fx:id="choiceQualidadeAdversario" prefWidth="150.0" GridPane.columnIndex="1"
+                                   GridPane.columnSpan="2" GridPane.rowIndex="1"/>
+                        <Label text="Qualidade Estádio:" GridPane.rowIndex="2"/>
+                        <ChoiceBox fx:id="choiceEstadio" prefWidth="150.0" GridPane.columnIndex="1"
+                                   GridPane.columnSpan="2" GridPane.rowIndex="2"/>
+                        <Label text="Qualidade Torcida:" GridPane.rowIndex="3"/>
+                        <ChoiceBox fx:id="choiceTorcida" prefWidth="150.0" GridPane.columnIndex="1"
+                                   GridPane.columnSpan="2" GridPane.rowIndex="3"/>
                     </children>
                 </GridPane>
-            <Label styleClass="h2" text="Método de Defuzzificação:" />
-            <GridPane>
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="142.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="150.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="150.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="15.0" minHeight="15.0" prefHeight="15.0" vgrow="SOMETIMES" />
-                  <RowConstraints vgrow="SOMETIMES" />
-                  <RowConstraints vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <RadioButton fx:id="radioBtnCentroGravidade" contentDisplay="BOTTOM" mnemonicParsing="false" selected="true" text="Centro de Gravidade">
-                     <toggleGroup>
-                        <ToggleGroup fx:id="toggleGroup" />
-                     </toggleGroup>
-                  </RadioButton>
-                  <RadioButton fx:id="radioBtnPrimeiroMaximos" mnemonicParsing="false" text="Primeiro dos Máximos" toggleGroup="$toggleGroup" GridPane.columnIndex="1" />
-                  <RadioButton fx:id="radioBtnMediaMaximos" mnemonicParsing="false" prefWidth="143.0" text="Média dos Máximos" toggleGroup="$toggleGroup" GridPane.columnIndex="2" />
-                        <Button mnemonicParsing="false" onAction="#handleBtnExecutar" prefHeight="40.0" prefWidth="100.0" styleClass="btn-primary" text="Executar" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                <Label styleClass="h2" text="Método de Defuzzificação:"/>
+                <GridPane>
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="142.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="150.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="150.0"/>
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints maxHeight="15.0" minHeight="15.0" prefHeight="15.0" vgrow="SOMETIMES"/>
+                        <RowConstraints vgrow="SOMETIMES"/>
+                        <RowConstraints vgrow="SOMETIMES"/>
+                    </rowConstraints>
+                    <children>
+                        <RadioButton fx:id="radioBtnCentroGravidade" contentDisplay="BOTTOM" mnemonicParsing="false"
+                                     selected="true" text="Centro de Gravidade">
+                            <toggleGroup>
+                                <ToggleGroup fx:id="toggleGroup"/>
+                            </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="radioBtnPrimeiroMaximos" mnemonicParsing="false" text="Primeiro dos Máximos"
+                                     toggleGroup="$toggleGroup" GridPane.columnIndex="1"/>
+                        <RadioButton fx:id="radioBtnMediaMaximos" mnemonicParsing="false" prefWidth="143.0"
+                                     text="Média dos Máximos" toggleGroup="$toggleGroup" GridPane.columnIndex="2"/>
+                        <Button mnemonicParsing="false" onAction="#handleBtnExecutar" prefHeight="40.0"
+                                prefWidth="100.0" styleClass="btn-primary" text="Executar"
+                                GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="2"
+                                GridPane.valignment="CENTER">
                             <GridPane.margin>
-                                <Insets />
+                                <Insets/>
                             </GridPane.margin>
                         </Button>
-                  <Label fx:id="labelResultado" styleClass="label-result" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-               </children>
-            </GridPane>
-                <Separator />
-                <Label styleClass="h2" text="Gerar Gráficos" />
+                        <Label fx:id="labelResultado" styleClass="label-result" GridPane.columnSpan="2147483647"
+                               GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER"/>
+                    </children>
+                </GridPane>
+                <Separator/>
+                <Label styleClass="h2" text="Gerar Gráficos"/>
                 <FlowPane hgap="10.0" prefWrapLength="300.0" vgap="10.0">
                     <children>
                         <SplitMenuButton mnemonicParsing="false" text="Variáveis de Entrada">
                             <items>
-                                <MenuItem mnemonicParsing="false" onAction="#handleBtnGraficoQualidadeTime" text="Qualidade Time" />
-                                <MenuItem mnemonicParsing="false" onAction="#handleBtnGraficoQualidadeAdversario" text="Qualidade Adverśario" />
-                                <MenuItem mnemonicParsing="false" onAction="#handleBtnGraficoEstadio" text="Estádio" />
-                                <MenuItem mnemonicParsing="false" onAction="#handleBtnGraficoTorcida" text="Torcida" />
+                                <MenuItem mnemonicParsing="false" onAction="#handleBtnGraficoQualidadeTime"
+                                          text="Qualidade Time"/>
+                                <MenuItem mnemonicParsing="false" onAction="#handleBtnGraficoQualidadeAdversario"
+                                          text="Qualidade Adverśario"/>
+                                <MenuItem mnemonicParsing="false" onAction="#handleBtnGraficoEstadio" text="Estádio"/>
+                                <MenuItem mnemonicParsing="false" onAction="#handleBtnGraficoTorcida" text="Torcida"/>
                             </items>
                         </SplitMenuButton>
                         <SplitMenuButton mnemonicParsing="false" text="Variáveis de Saída">
                             <items>
-                                <MenuItem mnemonicParsing="false" onAction="#handleBtnGraficoPossibilidade" text="Possibilidade" />
-                                <MenuItem mnemonicParsing="false" onAction="#handleBtnGraficoPossibilidadeDeffuzzy" text="Possibilidade Defuzzificada" />
+                                <MenuItem mnemonicParsing="false" onAction="#handleBtnGraficoPossibilidade"
+                                          text="Possibilidade"/>
+                                <MenuItem mnemonicParsing="false" onAction="#handleBtnGraficoPossibilidadeDeffuzzy"
+                                          text="Possibilidade Defuzzificada"/>
                             </items>
                         </SplitMenuButton>
                     </children>
                 </FlowPane>
             </children>
             <padding>
-                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
             </padding>
         </VBox>
-        <HBox>
-            <children>
-                <Region HBox.hgrow="ALWAYS" />
-                <Button mnemonicParsing="false" onAction="#handleBtnVoltar" text="Voltar" />
-            </children>
-        </HBox>
     </children>
     <padding>
-        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
     </padding>
 </VBox>

@@ -8,7 +8,10 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import profexosimulator.ProfexoSimulator;
@@ -20,13 +23,13 @@ public class PartidaController {
     @FXML
     private VBox root;
     @FXML
-    private ChoiceBox choiceQualidadeTime;
+    private ChoiceBox<String> choiceQualidadeTime;
     @FXML
-    private ChoiceBox choiceQualidadeAdversario;
+    private ChoiceBox<String> choiceQualidadeAdversario;
     @FXML
-    private ChoiceBox choiceEstadio;
+    private ChoiceBox<String> choiceEstadio;
     @FXML
-    private ChoiceBox choiceTorcida;
+    private ChoiceBox<String> choiceTorcida;
     @FXML
     private ToggleGroup toggleGroup;
     @FXML
@@ -81,54 +84,44 @@ public class PartidaController {
 
     @FXML
     public void handleBtnExecutar() {
-        //fuzzy.setMetodoDefuzzy(((RadioButton)toggleGroup.getSelectedToggle()).getText());
+        String metodoFuzzy = ((RadioButton) toggleGroup.getSelectedToggle()).getText();
+        String qualidadeTime = choiceQualidadeTime.getValue();
+        String qualidadeAdversario = choiceQualidadeAdversario.getValue();
+        String estadio = choiceEstadio.getValue();
+        String torcida = choiceTorcida.getValue();
+
+        fuzzy.setMetodoDefuzzy(metodoFuzzy);
+        fuzzy.executar(qualidadeTime, qualidadeAdversario, estadio, torcida);
+
+        String resultado = fuzzy.getResultado() + "";
+        labelResultado.setText(resultado);
 
         labelResultado.setVisible(true);
         fontAnim.playFromStart();
-
-        String resultado = "Vitória!";
-        labelResultado.setText(resultado);
-        labelResultado.getStyleClass().removeIf(s -> s.contains("color"));
-
-        switch (resultado) {
-            case "Vitória!":
-                labelResultado.getStyleClass().add("color-green");
-                break;
-            case "Derrota!":
-                labelResultado.getStyleClass().add("color-red");
-                break;
-        }
-
-    }
-
-    @FXML
-    public void handleBtnVoltar() {
-        MainController main = MainController.INSTANCE;
-        main.voltarTela(main.getElencoController().getRoot());
     }
 
     public void handleBtnGraficoQualidadeTime() {
-        fuzzy.mostrarGraficoVariavel(Fuzzy.VAR_INPUT_QUALIDADE_TIME);
+        fuzzy.mostrarGraficoVariavel(Fuzzy.Variavel.IN_QUALIDADE_TIME.getNome());
     }
 
     public void handleBtnGraficoQualidadeAdversario() {
-        fuzzy.mostrarGraficoVariavel(Fuzzy.VAR_INPUT_QUALIDADE_ADVERSARIO);
+        fuzzy.mostrarGraficoVariavel(Fuzzy.Variavel.IN_QUALIDADE_ADVERSARIO.getNome());
     }
 
     public void handleBtnGraficoEstadio() {
-        fuzzy.mostrarGraficoVariavel(Fuzzy.VAR_INPUT_QUALIDADE_ESTADIO);
+        fuzzy.mostrarGraficoVariavel(Fuzzy.Variavel.IN_QUALIDADE_ESTADIO.getNome());
     }
 
     public void handleBtnGraficoTorcida() {
-        fuzzy.mostrarGraficoVariavel(Fuzzy.VAR_INPUT_QUALIDADE_TORCIDA);
+        fuzzy.mostrarGraficoVariavel(Fuzzy.Variavel.IN_QUALIDADE_TORCIDA.getNome());
     }
 
     public void handleBtnGraficoPossibilidade() {
-        fuzzy.mostrarGraficoVariavel(Fuzzy.VAR_OUTPUT_POSSIBILIDADE);
+        fuzzy.mostrarGraficoVariavel(Fuzzy.Variavel.OUT_POSSIBILIDADE.getNome());
     }
 
     public void handleBtnGraficoPossibilidadeDeffuzzy() {
-        fuzzy.mostrarGraficoDefuzzy(Fuzzy.VAR_OUTPUT_POSSIBILIDADE);
+        fuzzy.mostrarGraficoDefuzzy(Fuzzy.Variavel.OUT_POSSIBILIDADE.getNome());
     }
 
     public VBox getRoot() {

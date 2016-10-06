@@ -14,12 +14,6 @@ public class Fuzzy {
 
     public static final String NOME_ARQUIVO = "regras_fuzzy_futebol.fcl";
 
-    public static final String VAR_INPUT_QUALIDADE_TIME = "Qualidade_Time";
-    public static final String VAR_INPUT_QUALIDADE_ADVERSARIO = "Qualidade_Adversario";
-    public static final String VAR_INPUT_QUALIDADE_ESTADIO = "Estadio";
-    public static final String VAR_INPUT_QUALIDADE_TORCIDA = "Torcida";
-    public static final String VAR_OUTPUT_POSSIBILIDADE = "Possibilidade";
-
     public static final String METODO_CENTRO_DE_GRAVIDADE = "Centro de Gravidade";
     public static final String METODO_PRIMEIRO_DOS_MAXIMOS = "Primeiro dos Máximos";
     public static final String METODO_MEDIA_DOS_MAXIMOS = "Média dos Máximos";
@@ -34,17 +28,22 @@ public class Fuzzy {
         }
     }
 
-    public void executar(double qualidadeTime, double qualidadeAdversario, double estadio, double torcida) {
+    public void executar(String qualidadeTime, String qualidadeAdversario, String estadio, String torcida) {
         if (fis == null) {
             return;
         }
 
-        fis.setVariable(VAR_INPUT_QUALIDADE_TIME, qualidadeTime);
-        fis.setVariable(VAR_INPUT_QUALIDADE_ADVERSARIO, qualidadeAdversario);
-        fis.setVariable(VAR_INPUT_QUALIDADE_ESTADIO, estadio);
-        fis.setVariable(VAR_INPUT_QUALIDADE_TORCIDA, torcida);
+        fis.setVariable(Variavel.IN_QUALIDADE_TIME.getNome(), Variavel.IN_QUALIDADE_TIME.valorToInt(qualidadeTime));
+        fis.setVariable(Variavel.IN_QUALIDADE_ADVERSARIO.getNome(), Variavel.IN_QUALIDADE_ADVERSARIO.valorToInt(qualidadeAdversario));
+        fis.setVariable(Variavel.IN_QUALIDADE_ESTADIO.getNome(), Variavel.IN_QUALIDADE_ESTADIO.valorToInt(estadio));
+        fis.setVariable(Variavel.IN_QUALIDADE_TORCIDA.getNome(), Variavel.IN_QUALIDADE_TORCIDA.valorToInt(torcida));
 
         fis.evaluate();
+    }
+
+    public double getResultado() {
+        Variable out = fis.getVariable(Variavel.OUT_POSSIBILIDADE.getNome());
+        return out.getValue();
     }
 
     public void mostrarGraficoVariavel(String variavel) {
@@ -61,7 +60,7 @@ public class Fuzzy {
     }
 
     public void setMetodoDefuzzy(String metodo) {
-        Variable out = fis.getVariable(VAR_OUTPUT_POSSIBILIDADE);
+        Variable out = fis.getVariable(Variavel.OUT_POSSIBILIDADE.getNome());
 
         switch (metodo) {
             case METODO_CENTRO_DE_GRAVIDADE:
@@ -81,11 +80,11 @@ public class Fuzzy {
         IN_QUALIDADE_TIME("Qualidade_Time", "Péssimo", "Ruim", "Regular", "Bom", "Ótimo"),
         IN_QUALIDADE_ADVERSARIO("Qualidade_Adversario", "Juvenil", "Amador", "Normal", "Difícil", "Alemanha"),
         IN_QUALIDADE_ESTADIO("Estadio", "Varzea", "Ruim", "Jogável", "Bom", "Tapete"),
-        IN_QUALIDADE_TORCIDA("Torcida", "Péssimo", "Ruim" , "Regular", "Bom", "Ótimo"),
+        IN_QUALIDADE_TORCIDA("Torcida", "Péssimo", "Ruim", "Regular", "Bom", "Ótimo"),
         OUT_POSSIBILIDADE("Possibilidade", "Derrota", "Empate", "Vitória");
 
-        private String nome;
-        private List<String> valores;
+        private final String nome;
+        private final List<String> valores;
 
         Variavel(String nome, String... vNome) {
             this.nome = nome;

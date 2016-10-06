@@ -23,10 +23,8 @@ public class MainController {
     private BorderPane borderPane;
 
     @FXML
-    private ParametrosController parametrosController;
-    private ElencoController elencoController;
-    private SobreController sobreController;
     private PartidaController partidaController;
+    private SobreController sobreController;
 
     public static MainController INSTANCE;
 
@@ -37,9 +35,7 @@ public class MainController {
         INSTANCE = this;
         simulador = new Simulador();
 
-        elencoController = inicializarController("../view/elenco.fxml");
         sobreController = inicializarController("../view/sobre.fxml");
-        partidaController = inicializarController("../view/partida.fxml");
 
         partidaController.setSimulador(simulador);
     }
@@ -100,14 +96,6 @@ public class MainController {
             e.printStackTrace();
         }
         return loader.getController();
-    }
-
-    public ParametrosController getParametrosController() {
-        return parametrosController;
-    }
-
-    public ElencoController getElencoController() {
-        return elencoController;
     }
 
     public PartidaController getPartidaController() {

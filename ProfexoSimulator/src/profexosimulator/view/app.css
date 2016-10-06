@@ -19,19 +19,11 @@
 
 .h2 {
     -fx-font-size: 18;
-    /*-fx-font-weight: bold;*/
 }
 
 .label-result {
     -fx-font-size: 1;
-}
-
-.color-green {
     -fx-text-fill: green;
-}
-
-.color-red {
-    -fx-text-fill: red;
 }
 
 .titled-pane > .title {
