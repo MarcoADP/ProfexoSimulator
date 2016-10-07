@@ -6,8 +6,11 @@ import net.sourceforge.jFuzzyLogic.defuzzifier.DefuzzifierLeftMostMax;
 import net.sourceforge.jFuzzyLogic.defuzzifier.DefuzzifierMeanMax;
 import net.sourceforge.jFuzzyLogic.plot.JDialogFis;
 import net.sourceforge.jFuzzyLogic.plot.JFuzzyChart;
+import net.sourceforge.jFuzzyLogic.plot.JPanelFis;
 import net.sourceforge.jFuzzyLogic.rule.Variable;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +34,7 @@ public class Fuzzy {
         }
 
         if (!JFuzzyChart.UseMockClass) {
-            jdf = new JDialogFis(fis, 800, 600);
+            jdf = new JDialogFisNovo(fis, 800, 600);
             jdf.setVisible(false);
         }
     }
@@ -55,6 +58,20 @@ public class Fuzzy {
     public double getResultado() {
         Variable out = fis.getVariable(Variavel.OUT_POSSIBILIDADE.getNome());
         return out.getValue();
+    }
+
+    public String getInfoResultado() {
+        double resultado = getResultado();
+
+        if (resultado > 4.999 && resultado < 5.099) {
+            return "Grande chance de empate.";
+        } else if (resultado < 3.0) {
+            return "Grande chance de derrota e pequena chance de empate.";
+        } else if (resultado > 7) {
+            return "Grande chance de vitória e pequena chance de empate.";
+        } else {
+            return "Grande chance de empate e chances de vitória e derrota.";
+        }
     }
 
     public void mostrarGraficoVariavel(String variavel) {
@@ -88,15 +105,18 @@ public class Fuzzy {
 
     public void mostrarAnimacao() {
         jdf.setVisible(true);
-        for (double i = 1; i <= 5; i += 0.1) {
-            executar(i, i, i, i);
+        Thread t = new Thread(() -> {
+            for (double i = 1; i <= 5; i += 0.1) {
+                executar(i, i, i, i);
 
-            try {
-                Thread.sleep(150);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+                try {
+                    Thread.sleep(150);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
-        }
+        });
+        t.start();
     }
 
     public void setDialogFisVisible(boolean visible) {
@@ -137,6 +157,30 @@ public class Fuzzy {
         @Override
         public String toString() {
             return nome;
+        }
+    }
+
+    private class JDialogFisNovo extends JDialogFis {
+
+        JPanel panel;
+
+        public JDialogFisNovo(FIS fis) {
+            super(fis);
+        }
+
+        public JDialogFisNovo(FIS fis, int width, int height) {
+            super(fis, width, height);
+        }
+
+        public void init(FIS fis, int width, int height) {
+            setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE); // The program may still run when the window is closed (that's why we don't use JFrame.EXIT_ON_CLOSE)
+            BoxLayout layout = new BoxLayout(getContentPane(), 0);
+            getContentPane().setLayout(layout);
+            pack();
+            panel = new JPanelFis(fis);
+            setSize(width, height);
+            setLayout(new BorderLayout());
+            getContentPane().add(panel, BorderLayout.CENTER);
         }
     }
 

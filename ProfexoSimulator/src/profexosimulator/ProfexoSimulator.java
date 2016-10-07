@@ -21,6 +21,8 @@ public class ProfexoSimulator extends Application {
         INSTANCE = this;
         this.stage = stage;
 
+        stage.setOnCloseRequest(event -> System.exit(0));
+
         try {
             Parent root = FXMLLoader.load(getClass().getResource("view/main.fxml"));
 

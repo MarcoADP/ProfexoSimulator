@@ -28,13 +28,13 @@ public class PartidaController {
     @FXML
     private Slider sliderTorcida;
     @FXML
-    private Spinner spinnerQualidadeTime;
+    private Spinner<Number> spinnerQualidadeTime;
     @FXML
-    private Spinner spinnerQualidadeAdversario;
+    private Spinner<Number> spinnerQualidadeAdversario;
     @FXML
-    private Spinner spinnerEstadio;
+    private Spinner<Number> spinnerEstadio;
     @FXML
-    private Spinner spinnerTorcida;
+    private Spinner<Number> spinnerTorcida;
     @FXML
     private ToggleGroup toggleGroup;
     @FXML
@@ -45,6 +45,8 @@ public class PartidaController {
     private RadioButton radioBtnMediaMaximos;
     @FXML
     private Label labelResultado;
+    @FXML
+    private Label labelResultadoInfo;
     @FXML
     private CheckBox checkBoxGraficos;
 
@@ -108,6 +110,8 @@ public class PartidaController {
         labelResultado.setVisible(true);
         fontAnim.playFromStart();
         fontAnim.setOnFinished(event -> ProfexoSimulator.INSTANCE.getStage().sizeToScene());
+
+        labelResultadoInfo.setText(fuzzy.getInfoResultado());
     }
 
     public void handleBtnGraficoMostrarAnimacao() {

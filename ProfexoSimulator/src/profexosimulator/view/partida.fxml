@@ -100,6 +100,7 @@
                         <RowConstraints maxHeight="15.0" minHeight="15.0" prefHeight="15.0" vgrow="SOMETIMES"/>
                         <RowConstraints vgrow="SOMETIMES"/>
                         <RowConstraints vgrow="SOMETIMES"/>
+                        <RowConstraints vgrow="SOMETIMES"/>
                     </rowConstraints>
                     <children>
                         <RadioButton fx:id="radioBtnCentroGravidade" contentDisplay="BOTTOM" mnemonicParsing="false"
@@ -122,6 +123,8 @@
                         </Button>
                         <Label fx:id="labelResultado" styleClass="label-result" GridPane.columnSpan="2147483647"
                                GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER"/>
+                        <Label fx:id="labelResultadoInfo" GridPane.columnSpan="2147483647"
+                               GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER"/>
                     </children>
                 </GridPane>
                 <Separator/>
