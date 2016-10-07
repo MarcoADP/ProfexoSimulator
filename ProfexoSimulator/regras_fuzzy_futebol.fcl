@@ -16,38 +16,38 @@ END_VAR
 
 // Fuzzify variável de entrada 'Qualidade_Time': {'pessimo', 'ruim' , 'regular', 'bom', 'otimo'}
 FUZZIFY Qualidade_Time			
-	TERM pessimo := (1, 1) (3, 0);
-	TERM ruim := (1, 0) (2, 1) (3, 0);
+	TERM pessimo := (1, 1) (2, 0);
+	TERM ruim := (1.25, 0) (2, 1) (2.75, 0);
 	TERM regular := (2, 0) (3,1) (4,0);
-	TERM bom := (3, 0) (4, 1) (5, 0);
-	TERM otimo := (3,0) (5,1);
+	TERM bom := (3.25, 0) (4, 1) (4.75, 0);
+	TERM otimo := (4,0) (5,1);
 END_FUZZIFY
 
 // Fuzzify variável de entrada 'Qualidade_Adversario': {  'juvenil', 'amador', 'normal', 'dificil', 'alemanha'}
 FUZZIFY Qualidade_Adversario			
-	TERM juvenil := (1, 1) (3, 0);
-	TERM amador := (1, 0) (2, 1) (3, 0);
+	TERM juvenil := (1, 1) (2, 0);
+	TERM amador := (1.25, 0) (2, 1) (2.75, 0);
 	TERM normal := (2, 0) (3,1) (4,0);
-	TERM dificil := (3, 0) (4, 1) (5, 0);
-	TERM alemanha := (3,0) (5,1);
+	TERM dificil := (3.25, 0) (4, 1) (4.75, 0);
+	TERM alemanha := (4,0) (5,1);
 END_FUZZIFY
 
 // Fuzzify variável de entrada 'Estadio': { 'varzea', 'ruim', 'jogavel', 'bom', 'tapete'}
 FUZZIFY Estadio			
-	TERM varzea := (1, 1) (3, 0);
-	TERM ruim := (1, 0) (2, 1) (3, 0);
+	TERM varzea := (1, 1) (2, 0);
+	TERM ruim := (1.25, 0) (2, 1) (2.75, 0);
 	TERM jogavel := (2, 0) (3,1) (4,0);
-	TERM bom := (3, 0) (4, 1) (5, 0);
-	TERM tapete := (3,0) (5,1);
+	TERM bom := (3.25, 0) (4, 1) (4.75, 0);
+	TERM tapete := (4,0) (5,1);
 END_FUZZIFY
 
 // Fuzzify variável de entrada 'Torcida': { 'pessimo', 'ruim' , 'regular', 'bom', 'otimo'}
 FUZZIFY Torcida			
-	TERM pessimo := (1, 1) (3, 0);
-	TERM ruim := (1, 0) (2, 1) (3, 0);
+	TERM pessimo := (1, 1) (2, 0);
+	TERM ruim := (1.25, 0) (2, 1) (2.75, 0);
 	TERM regular := (2, 0) (3,1) (4,0);
-	TERM bom := (3, 0) (4, 1) (5, 0);
-	TERM otimo := (3,0) (5,1);
+	TERM bom := (3.25, 0) (4, 1) (4.75, 0);
+	TERM otimo := (4,0) (5,1);
 END_FUZZIFY
 
 

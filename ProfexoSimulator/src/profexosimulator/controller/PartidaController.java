@@ -8,10 +8,7 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import profexosimulator.ProfexoSimulator;
@@ -23,13 +20,21 @@ public class PartidaController {
     @FXML
     private VBox root;
     @FXML
-    private ChoiceBox<String> choiceQualidadeTime;
+    private Slider sliderQualidadeTime;
     @FXML
-    private ChoiceBox<String> choiceQualidadeAdversario;
+    private Slider sliderQualidadeAdversario;
     @FXML
-    private ChoiceBox<String> choiceEstadio;
+    private Slider sliderEstadio;
     @FXML
-    private ChoiceBox<String> choiceTorcida;
+    private Slider sliderTorcida;
+    @FXML
+    private Spinner spinnerQualidadeTime;
+    @FXML
+    private Spinner spinnerQualidadeAdversario;
+    @FXML
+    private Spinner spinnerEstadio;
+    @FXML
+    private Spinner spinnerTorcida;
     @FXML
     private ToggleGroup toggleGroup;
     @FXML
@@ -40,40 +45,37 @@ public class PartidaController {
     private RadioButton radioBtnMediaMaximos;
     @FXML
     private Label labelResultado;
+    @FXML
+    private CheckBox checkBoxGraficos;
 
     private Simulador simulador;
     private Fuzzy fuzzy;
 
     private Timeline fontAnim;
 
-    private DoubleProperty fontSize = new SimpleDoubleProperty(1);
-
     @FXML
     public void initialize() {
-        choiceQualidadeTime.getItems().addAll(Fuzzy.Variavel.IN_QUALIDADE_TIME.getValores());
-        choiceQualidadeTime.getSelectionModel().select(0);
-
-        choiceQualidadeAdversario.getItems().addAll(Fuzzy.Variavel.IN_QUALIDADE_ADVERSARIO.getValores());
-        choiceQualidadeAdversario.getSelectionModel().select(0);
-
-        choiceEstadio.getItems().addAll(Fuzzy.Variavel.IN_QUALIDADE_ESTADIO.getValores());
-        choiceEstadio.getSelectionModel().select(0);
-
-        choiceTorcida.getItems().addAll(Fuzzy.Variavel.IN_QUALIDADE_TORCIDA.getValores());
-        choiceTorcida.getSelectionModel().select(0);
+        configurarSpinnersSliders();
 
         radioBtnCentroGravidade.setText(Fuzzy.METODO_CENTRO_DE_GRAVIDADE);
         radioBtnPrimeiroMaximos.setText(Fuzzy.METODO_PRIMEIRO_DOS_MAXIMOS);
         radioBtnMediaMaximos.setText(Fuzzy.METODO_MEDIA_DOS_MAXIMOS);
 
+        checkBoxGraficos.selectedProperty().addListener((observable, oldValue, newValue) -> fuzzy.setDialogFisVisible(newValue));
+
+        configurarAnimacaoLabelResultado();
+    }
+
+    private void configurarAnimacaoLabelResultado() {
         labelResultado.setVisible(false);
-        fontSize.addListener((observable, oldValue, newValue) -> ProfexoSimulator.INSTANCE.getStage().sizeToScene());
+
+        DoubleProperty fontSize = new SimpleDoubleProperty(1);
 
         KeyFrame start = new KeyFrame(Duration.ZERO,
                 new KeyValue(labelResultado.opacityProperty(), 0),
                 new KeyValue(fontSize, 1));
 
-        KeyFrame end = new KeyFrame(Duration.millis(500),
+        KeyFrame end = new KeyFrame(Duration.millis(400),
                 new KeyValue(labelResultado.opacityProperty(), 1),
                 new KeyValue(fontSize, 48));
 
@@ -82,22 +84,34 @@ public class PartidaController {
         labelResultado.styleProperty().bind(Bindings.concat("-fx-font-size: ", fontSize.asString(), ";"));
     }
 
+    private void configurarSpinnersSliders() {
+        spinnerQualidadeTime.getValueFactory().valueProperty().bindBidirectional(sliderQualidadeTime.valueProperty());
+        spinnerQualidadeAdversario.getValueFactory().valueProperty().bindBidirectional(sliderQualidadeAdversario.valueProperty());
+        spinnerEstadio.getValueFactory().valueProperty().bindBidirectional(sliderEstadio.valueProperty());
+        spinnerTorcida.getValueFactory().valueProperty().bindBidirectional(sliderTorcida.valueProperty());
+    }
+
     @FXML
     public void handleBtnExecutar() {
         String metodoFuzzy = ((RadioButton) toggleGroup.getSelectedToggle()).getText();
-        String qualidadeTime = choiceQualidadeTime.getValue();
-        String qualidadeAdversario = choiceQualidadeAdversario.getValue();
-        String estadio = choiceEstadio.getValue();
-        String torcida = choiceTorcida.getValue();
+        double qualidadeTime = sliderQualidadeTime.getValue();
+        double qualidadeAdversario = sliderQualidadeAdversario.getValue();
+        double estadio = sliderEstadio.getValue();
+        double torcida = sliderTorcida.getValue();
 
         fuzzy.setMetodoDefuzzy(metodoFuzzy);
         fuzzy.executar(qualidadeTime, qualidadeAdversario, estadio, torcida);
 
-        String resultado = fuzzy.getResultado() + "";
+        String resultado = String.format("%.4f", fuzzy.getResultado());
         labelResultado.setText(resultado);
 
         labelResultado.setVisible(true);
         fontAnim.playFromStart();
+        fontAnim.setOnFinished(event -> ProfexoSimulator.INSTANCE.getStage().sizeToScene());
+    }
+
+    public void handleBtnGraficoMostrarAnimacao() {
+        fuzzy.mostrarAnimacao();
     }
 
     public void handleBtnGraficoQualidadeTime() {

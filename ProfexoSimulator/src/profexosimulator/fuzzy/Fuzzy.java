@@ -4,6 +4,7 @@ import net.sourceforge.jFuzzyLogic.FIS;
 import net.sourceforge.jFuzzyLogic.defuzzifier.DefuzzifierCenterOfGravity;
 import net.sourceforge.jFuzzyLogic.defuzzifier.DefuzzifierLeftMostMax;
 import net.sourceforge.jFuzzyLogic.defuzzifier.DefuzzifierMeanMax;
+import net.sourceforge.jFuzzyLogic.plot.JDialogFis;
 import net.sourceforge.jFuzzyLogic.plot.JFuzzyChart;
 import net.sourceforge.jFuzzyLogic.rule.Variable;
 
@@ -19,26 +20,36 @@ public class Fuzzy {
     public static final String METODO_MEDIA_DOS_MAXIMOS = "Média dos Máximos";
 
     private FIS fis;
+    private JDialogFis jdf;
 
     public Fuzzy() {
         fis = FIS.load(NOME_ARQUIVO);
 
         if (fis == null) {
             System.out.println("Não foi possível abrir o arquivo: " + NOME_ARQUIVO);
+            return;
+        }
+
+        if (!JFuzzyChart.UseMockClass) {
+            jdf = new JDialogFis(fis, 800, 600);
+            jdf.setVisible(false);
         }
     }
 
-    public void executar(String qualidadeTime, String qualidadeAdversario, String estadio, String torcida) {
+    public void executar(double qualidadeTime, double qualidadeAdversario, double estadio, double torcida) {
         if (fis == null) {
             return;
         }
 
-        fis.setVariable(Variavel.IN_QUALIDADE_TIME.getNome(), Variavel.IN_QUALIDADE_TIME.valorToInt(qualidadeTime));
-        fis.setVariable(Variavel.IN_QUALIDADE_ADVERSARIO.getNome(), Variavel.IN_QUALIDADE_ADVERSARIO.valorToInt(qualidadeAdversario));
-        fis.setVariable(Variavel.IN_QUALIDADE_ESTADIO.getNome(), Variavel.IN_QUALIDADE_ESTADIO.valorToInt(estadio));
-        fis.setVariable(Variavel.IN_QUALIDADE_TORCIDA.getNome(), Variavel.IN_QUALIDADE_TORCIDA.valorToInt(torcida));
+        fis.setVariable(Variavel.IN_QUALIDADE_TIME.getNome(), qualidadeTime);
+        fis.setVariable(Variavel.IN_QUALIDADE_ADVERSARIO.getNome(), qualidadeAdversario);
+        fis.setVariable(Variavel.IN_QUALIDADE_ESTADIO.getNome(), estadio);
+        fis.setVariable(Variavel.IN_QUALIDADE_TORCIDA.getNome(), torcida);
 
         fis.evaluate();
+        if (jdf != null) {
+            jdf.repaint();
+        }
     }
 
     public double getResultado() {
@@ -73,6 +84,23 @@ public class Fuzzy {
                 out.setDefuzzifier(new DefuzzifierLeftMostMax(out));
                 break;
         }
+    }
+
+    public void mostrarAnimacao() {
+        jdf.setVisible(true);
+        for (double i = 1; i <= 5; i += 0.1) {
+            executar(i, i, i, i);
+
+            try {
+                Thread.sleep(150);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void setDialogFisVisible(boolean visible) {
+        jdf.setVisible(visible);
     }
 
     public enum Variavel {
@@ -112,5 +140,4 @@ public class Fuzzy {
         }
     }
 
-    //TODO: Colocar o overall geral do time na tela de elenco
 }
